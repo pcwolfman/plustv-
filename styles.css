@@ -1,0 +1,6147 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --primary-light: #818cf8;
+    --primary-rgb: 99, 102, 241;
+    --bg-dark: #0f172a;
+    --bg-card: #1e293b;
+    --bg-hover: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --success: #10b981;
+    --danger: #ef4444;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-lg: rgba(0, 0, 0, 0.5);
+}
+
+/* Color Themes */
+:root[data-theme="red"] {
+    --primary: #f43f5e;
+    --primary-dark: #e11d48;
+    --primary-light: #fb7185;
+    --primary-rgb: 244, 63, 94;
+    --bg-dark: #1a0f12;
+    --bg-card: #2a1519;
+    --bg-hover: #3a1f25;
+    --border: #3a1f25;
+    --bg-gradient: linear-gradient(135deg, #1a0f12 0%, #2a1519 100%);
+}
+
+:root[data-theme="blue"] {
+    --primary: #0ea5e9;
+    --primary-dark: #0284c7;
+    --primary-light: #38bdf8;
+    --primary-rgb: 14, 165, 233;
+    --bg-dark: #0a1419;
+    --bg-card: #152028;
+    --bg-hover: #252c38;
+    --border: #252c38;
+    --bg-gradient: linear-gradient(135deg, #0a1419 0%, #152028 100%);
+}
+
+:root[data-theme="purple"] {
+    --primary: #8b5cf6;
+    --primary-dark: #7c3aed;
+    --primary-light: #a78bfa;
+    --primary-rgb: 139, 92, 246;
+    --bg-dark: #0f0f1a;
+    --bg-card: #1a1a2e;
+    --bg-hover: #2a2a3e;
+    --border: #2a2a3e;
+    --bg-gradient: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+}
+
+:root[data-theme="turquoise"] {
+    --primary: #10b981;
+    --primary-dark: #059669;
+    --primary-light: #34d399;
+    --primary-rgb: 16, 185, 129;
+    --bg-dark: #0a1412;
+    --bg-card: #152420;
+    --bg-hover: #253430;
+    --border: #253430;
+    --bg-gradient: linear-gradient(135deg, #0a1412 0%, #152420 100%);
+}
+
+:root[data-theme="gray"] {
+    --primary: #64748b;
+    --primary-dark: #475569;
+    --primary-light: #94a3b8;
+    --primary-rgb: 100, 116, 139;
+    --bg-dark: #0f1115;
+    --bg-card: #1a1d24;
+    --bg-hover: #2a2d34;
+    --border: #2a2d34;
+    --bg-gradient: linear-gradient(135deg, #0f1115 0%, #1a1d24 100%);
+}
+
+:root[data-theme="brown"] {
+    --primary: #f59e0b;
+    --primary-dark: #d97706;
+    --primary-light: #fbbf24;
+    --primary-rgb: 245, 158, 11;
+    --bg-dark: #1a140f;
+    --bg-card: #2a1f15;
+    --bg-hover: #3a2f25;
+    --border: #3a2f25;
+    --bg-gradient: linear-gradient(135deg, #1a140f 0%, #2a1f15 100%);
+}
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg-gradient, var(--bg-dark));
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    /* Optimize for responsive performance */
+    will-change: contents;
+    contain: layout style;
+}
+
+/* Arama Header - Modern ve Kompakt */
+.search-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 0.375rem 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    /* Optimize for responsive performance */
+    will-change: transform;
+    contain: layout style;
+    min-height: 62px;
+    max-height: 62px;
+    overflow: visible;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+.search-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    box-sizing: border-box;
+    overflow: visible;
+    flex-wrap: nowrap;
+    min-height: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.header-left-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+    min-width: 0;
+}
+
+.channel-source-switch {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 1;
+    margin: 0 0.5rem;
+    min-width: 0;
+    overflow: visible;
+}
+
+.channel-source-select {
+    padding: 0.65rem 1.15rem;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.05) 100%);
+    border: 1.5px solid rgba(99, 102, 241, 0.2);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 180px;
+    font-family: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 3rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23999bff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    background-size: 14px;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+}
+
+.channel-source-select::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    padding: 1.5px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(139, 92, 246, 0.2));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.channel-source-select:hover {
+    border-color: rgba(99, 102, 241, 0.4);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(139, 92, 246, 0.08) 100%);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.channel-source-select:hover::before {
+    opacity: 1;
+}
+
+.channel-source-select:focus {
+    outline: none;
+    border-color: rgba(99, 102, 241, 0.6);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.1) 100%);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2), 0 4px 20px rgba(99, 102, 241, 0.25);
+    transform: translateY(-1px);
+}
+
+.channel-source-select:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+
+.channel-source-select[data-custom-select="true"]::-ms-expand {
+    display: none;
+}
+
+.channel-source-select[data-custom-select="true"] {
+    cursor: pointer;
+}
+
+/* Kullanıcı listesi container */
+.users-list-container {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, rgba(12, 14, 24, 0.95) 0%, rgba(20, 22, 35, 0.95) 100%);
+    border: 1.5px solid rgba(99, 102, 241, 0.2);
+    border-radius: 16px;
+    max-height: 320px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(99, 102, 241, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    min-width: 280px;
+    display: none;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.users-list-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.users-list-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+}
+
+.users-list-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(99, 102, 241, 0.4), rgba(139, 92, 246, 0.4));
+    border-radius: 10px;
+}
+
+.users-list-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgba(99, 102, 241, 0.6), rgba(139, 92, 246, 0.6));
+}
+
+/* :empty kuralını kaldırdık, JavaScript'te kontrol ediyoruz */
+
+/* Kullanıcı listesi item */
+.user-list-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0.9rem 1.2rem;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.08);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 0.75rem;
+    position: relative;
+    margin: 0.2rem 0.4rem;
+    border-radius: 10px;
+}
+
+.user-list-item:last-child {
+    border-bottom: none;
+}
+
+.user-list-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background: linear-gradient(180deg, rgba(99, 102, 241, 1), rgba(139, 92, 246, 1));
+    border-radius: 0 3px 3px 0;
+    transition: height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.user-list-item:hover {
+    background: linear-gradient(90deg, rgba(99, 102, 241, 0.12) 0%, rgba(139, 92, 246, 0.06) 100%);
+    transform: translateX(4px);
+    border-bottom-color: rgba(99, 102, 241, 0.15);
+}
+
+.user-list-item:hover::before {
+    height: 60%;
+}
+
+.user-list-item.active {
+    background: linear-gradient(90deg, rgba(99, 102, 241, 0.22) 0%, rgba(139, 92, 246, 0.12) 100%);
+    color: var(--text-primary);
+    border-bottom-color: rgba(99, 102, 241, 0.25);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+}
+
+.user-list-item.active::before {
+    height: 80%;
+    background: linear-gradient(180deg, rgba(99, 102, 241, 1), rgba(139, 92, 246, 1));
+}
+
+.user-list-item.active .user-list-item-name,
+.user-list-item.active .user-list-item-channels,
+.user-list-item.active .user-list-item-subtitle {
+    color: var(--text-primary);
+}
+
+.user-list-item-name {
+    flex: 1;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+    transition: color 0.2s ease;
+}
+
+.user-list-item:hover .user-list-item-name {
+    color: rgba(99, 102, 241, 0.95);
+}
+
+.user-list-item.active .user-list-item-name {
+    color: rgba(99, 102, 241, 1);
+    font-weight: 700;
+}
+
+.user-list-item-channels {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    background: rgba(99, 102, 241, 0.1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.user-list-item:hover .user-list-item-channels {
+    background: rgba(99, 102, 241, 0.18);
+    color: rgba(99, 102, 241, 0.9);
+}
+
+.user-list-item.active .user-list-item-channels {
+    background: rgba(99, 102, 241, 0.25);
+    color: rgba(99, 102, 241, 1);
+}
+
+.user-list-item-subtitle {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.user-list-item-delete {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(220, 38, 38, 0.08));
+    border: 1.5px solid rgba(239, 68, 68, 0.3);
+    color: var(--danger);
+    cursor: pointer;
+    padding: 0.4rem 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.9;
+    font-size: 0.75rem;
+    gap: 0.35rem;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.1);
+}
+
+.user-list-item-delete:hover {
+    color: #fff;
+    opacity: 1;
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(220, 38, 38, 0.2));
+    border-color: rgba(239, 68, 68, 0.6);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.user-list-item-delete:active {
+    transform: translateY(0) scale(1);
+}
+
+.user-list-item.active .user-list-item-delete {
+    color: var(--danger);
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.9);
+}
+
+.user-list-item.active .user-list-item-delete:hover {
+    color: var(--danger);
+    background: rgba(255, 255, 255, 1);
+}
+
+.user-list-item-delete-icon {
+    font-size: 0.85rem;
+}
+
+.user-list-item-delete-text {
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.user-list-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.user-list-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.user-list-item-badge {
+    background: rgba(99, 102, 241, 0.15);
+    color: var(--text-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid rgba(99, 102, 241, 0.35);
+}
+
+.user-list-item-default {
+    backdrop-filter: blur(4px);
+}
+
+.user-list-hint {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-dark);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.user-list-close-btn {
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.1rem;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.user-list-close-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.header-right-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    min-width: 0;
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.header-right-buttons > * {
+    pointer-events: auto;
+}
+
+.header-right-buttons svg {
+    pointer-events: none;
+}
+
+.logo-container {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    height: 28px;
+    padding: 0.15rem 0.3rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    backdrop-filter: blur(10px);
+}
+
+.header-logo {
+    height: 24px;
+    width: auto;
+    max-width: 150px;
+    object-fit: contain;
+    display: block;
+    opacity: 0.9;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.zoom-toggle-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--bg-dark);
+    border: 2px solid rgba(99, 102, 241, 0.4);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    padding: 0;
+    min-width: 28px;
+    min-height: 28px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: auto;
+    z-index: 10;
+    position: relative;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(99, 102, 241, 0.2) inset,
+        0 0 15px rgba(99, 102, 241, 0.3);
+}
+
+.zoom-toggle-btn:hover {
+    background: var(--bg-hover);
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+.zoom-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.zoom-toggle-btn svg {
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+}
+
+.view-menu-container {
+    position: relative;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.color-picker-container {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    flex-shrink: 1;
+    min-width: 0;
+    max-width: fit-content;
+    overflow: visible;
+    min-height: 100%;
+    height: 100%;
+    padding: 2px 0; /* Active state için alan bırak */
+}
+
+.color-picker-btn {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    position: relative;
+    min-width: 25px;
+    min-height: 25px;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+        0 1px 0 rgba(255, 255, 255, 0.2) inset,
+        0 -1px 0 rgba(0, 0, 0, 0.2) inset;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent 70%);
+}
+
+.color-picker-btn:hover {
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 
+        0 3px 12px rgba(0, 0, 0, 0.4),
+        0 0 18px rgba(255, 255, 255, 0.3),
+        0 0 0 2px rgba(255, 255, 255, 0.2) inset,
+        0 2px 0 rgba(255, 255, 255, 0.3) inset,
+        0 -2px 0 rgba(0, 0, 0, 0.3) inset;
+    z-index: 1;
+}
+
+.color-picker-btn.active {
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(255, 255, 255, 0.4),
+        0 0 0 2px rgba(255, 255, 255, 0.3) inset,
+        0 2px 0 rgba(255, 255, 255, 0.4) inset,
+        0 -2px 0 rgba(0, 0, 0, 0.4) inset;
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+.color-picker-btn.active::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.refresh-icon-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--bg-dark);
+    border: 2px solid rgba(99, 102, 241, 0.4);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    padding: 0;
+    min-width: 28px;
+    min-height: 28px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: auto;
+    z-index: 10;
+    position: relative;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(99, 102, 241, 0.2) inset,
+        0 0 15px rgba(99, 102, 241, 0.3);
+}
+
+.refresh-icon-btn:hover {
+    background: var(--bg-hover);
+    border-color: var(--primary);
+    transform: scale(1.1);
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 2px rgba(99, 102, 241, 0.3) inset,
+        0 0 25px rgba(99, 102, 241, 0.5);
+}
+
+.refresh-icon-btn:active {
+    transform: scale(0.95);
+}
+
+.refresh-icon-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.refresh-icon-btn.refreshing svg {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.refresh-icon-btn svg {
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+}
+
+/* Sırala İkonu */
+.sort-icon-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--bg-dark);
+    border: 2px solid rgba(99, 102, 241, 0.4);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    padding: 0;
+    min-width: 28px;
+    min-height: 28px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: auto;
+    z-index: 10;
+    position: relative;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(99, 102, 241, 0.2) inset,
+        0 0 15px rgba(99, 102, 241, 0.3);
+}
+
+.sort-icon-btn:hover {
+    background: var(--bg-hover);
+    border-color: var(--primary);
+    transform: scale(1.1);
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 2px rgba(99, 102, 241, 0.3) inset,
+        0 0 25px rgba(99, 102, 241, 0.5);
+}
+
+.sort-icon-btn:active {
+    transform: scale(0.95);
+}
+
+.sort-icon-btn svg {
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+}
+
+.search-icon-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--bg-dark);
+    border: 2px solid rgba(99, 102, 241, 0.4);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    padding: 0;
+    min-width: 28px;
+    min-height: 28px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: auto;
+    z-index: 10;
+    position: relative;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(99, 102, 241, 0.2) inset,
+        0 0 15px rgba(99, 102, 241, 0.3);
+}
+
+.search-icon-btn:hover {
+    background: var(--bg-hover);
+    border-color: var(--primary);
+    transform: scale(1.1);
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 2px rgba(99, 102, 241, 0.3) inset,
+        0 0 25px rgba(99, 102, 241, 0.5);
+}
+
+.search-icon-btn:active {
+    transform: scale(0.95);
+}
+
+.search-icon-btn svg {
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+}
+
+/* M3U Switch Butonu (İki İnsan İkonu) */
+.users-switch-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--bg-dark);
+    border: 2px solid rgba(99, 102, 241, 0.4);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    padding: 0;
+    min-width: 28px;
+    min-height: 28px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: auto;
+    z-index: 10;
+    position: relative;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(99, 102, 241, 0.2) inset,
+        0 0 15px rgba(99, 102, 241, 0.3);
+}
+
+.users-switch-btn:hover {
+    background: var(--bg-hover);
+    border-color: var(--primary);
+    transform: scale(1.1);
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 2px rgba(99, 102, 241, 0.3) inset,
+        0 0 25px rgba(99, 102, 241, 0.5);
+}
+
+.users-switch-btn:active {
+    transform: scale(0.95);
+}
+
+.users-switch-btn svg {
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+}
+
+/* M3U Switch Modal */
+.m3u-switch-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.m3u-switch-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.m3u-switch-modal-content {
+    background: var(--bg-card);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.m3u-switch-modal.active .m3u-switch-modal-content {
+    transform: scale(1);
+}
+
+.m3u-switch-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.m3u-switch-modal-header h3 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.m3u-switch-modal-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    padding: 0;
+    line-height: 1;
+}
+
+.m3u-switch-modal-close:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.m3u-switch-modal-body {
+    padding: 1rem;
+    max-height: calc(80vh - 80px);
+    overflow-y: auto;
+}
+
+.m3u-switch-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.m3u-switch-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background: var(--bg-hover);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.m3u-switch-item:hover {
+    background: var(--bg-card);
+    border-color: var(--primary);
+    transform: translateX(4px);
+}
+
+.m3u-switch-item.active {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.15) 100%);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.m3u-switch-item-name {
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    flex: 1;
+}
+
+.m3u-switch-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.m3u-switch-item-delete {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.m3u-switch-item-delete:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.m3u-switch-item-delete svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Sıralama Modal */
+.sort-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sort-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.sort-modal-content {
+    background: var(--bg-card);
+    border-radius: 12px;
+    width: 85%;
+    max-width: 360px;
+    max-height: 70vh;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.sort-modal.active .sort-modal-content {
+    transform: scale(1);
+}
+
+.sort-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.sort-modal-header h3 {
+    color: var(--text-primary);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.sort-modal-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    padding: 0;
+    line-height: 1;
+}
+
+.sort-modal-close:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.sort-modal-body {
+    padding: 1rem;
+    max-height: calc(70vh - 60px);
+    overflow-y: auto;
+}
+
+.sort-section {
+    margin-bottom: 1rem;
+}
+
+.sort-section:last-child {
+    margin-bottom: 0;
+}
+
+.sort-section h4 {
+    color: var(--text-primary);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
+}
+
+.sort-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sort-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: var(--bg-hover);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    border: none;
+    width: 100%;
+    text-align: left;
+}
+
+.sort-option:hover {
+    background: var(--bg-card);
+    border-color: var(--primary);
+    transform: translateX(4px);
+}
+
+.sort-option.active {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.15) 100%);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.sort-option span {
+    flex: 1;
+}
+
+/* M3U Butonları Grubu */
+.m3u-buttons-group {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
+}
+
+/* Kullanıcı İkonu ve Menü */
+.user-menu-container {
+    position: relative;
+    flex-shrink: 0;
+    z-index: 10001;
+}
+
+.user-icon-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--bg-dark);
+    border: 2px solid rgba(99, 102, 241, 0.4);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    padding: 0;
+    min-width: 28px;
+    min-height: 28px;
+    position: relative;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: auto;
+    z-index: 10;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(99, 102, 241, 0.2) inset,
+        0 0 15px rgba(99, 102, 241, 0.3);
+}
+
+.user-icon-btn:hover {
+    background: var(--bg-hover);
+    border-color: var(--primary);
+    transform: scale(1.1);
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 2px rgba(99, 102, 241, 0.3) inset,
+        0 0 25px rgba(99, 102, 241, 0.5);
+}
+
+.user-icon-btn:hover {
+    background: var(--bg-hover);
+    border-color: var(--primary);
+    transform: scale(1.1);
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 2px rgba(99, 102, 241, 0.3) inset,
+        0 0 25px rgba(99, 102, 241, 0.5);
+}
+
+.user-icon-btn:active {
+    transform: scale(0.95);
+}
+
+.user-icon-btn svg {
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+}
+
+.user-icon-btn svg circle[fill] {
+    fill: var(--primary);
+    filter: drop-shadow(0 2px 4px rgba(99, 102, 241, 0.4));
+}
+
+.user-icon-btn:hover svg circle[fill] {
+    fill: var(--primary-light);
+    filter: drop-shadow(0 2px 6px rgba(99, 102, 241, 0.6));
+}
+
+.user-menu-dropdown {
+    display: none;
+    position: fixed;
+    top: auto;
+    right: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    min-width: 220px;
+    z-index: 10001;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.user-menu-container.active .user-menu-dropdown,
+.user-menu-dropdown[style*="display: block"] {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+    visibility: visible !important;
+}
+
+.user-menu-item {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9375rem;
+    transition: all 0.2s ease;
+    text-align: left;
+    font-family: inherit;
+}
+
+.user-menu-item:hover {
+    background: var(--bg-hover);
+    color: var(--primary);
+}
+
+.user-menu-item svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.user-menu-item span {
+    flex: 1;
+}
+
+/* Arama Modalı */
+.search-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.search-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.search-modal-content {
+    background: var(--bg-card);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.search-modal.active .search-modal-content {
+    transform: scale(1);
+}
+
+.search-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.search-modal-header h3 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.search-modal-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    padding: 0;
+    line-height: 1;
+}
+
+.search-modal-close:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.search-modal-body {
+    padding: 1.5rem;
+}
+
+.search-box-modal {
+    position: relative;
+    width: 100%;
+}
+
+.search-box-modal .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.search-box-modal input {
+    width: 100%;
+    padding: 0.875rem 3rem 0.875rem 3rem;
+    background: var(--bg-dark);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    min-height: 50px;
+}
+
+.search-box-modal input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: var(--bg-hover);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.search-box-modal input::placeholder {
+    color: var(--text-muted);
+}
+
+.clear-search-modal {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.125rem;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    z-index: 2;
+}
+
+.clear-search-modal:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+/* API Modal (Xtream Codes ve M3U) */
+.api-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.api-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.api-modal-content {
+    background: var(--bg-card);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.api-modal.active .api-modal-content {
+    transform: scale(1);
+}
+
+.api-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.api-modal-header h3 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.api-modal-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    padding: 0;
+    line-height: 1;
+}
+
+.api-modal-close:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.api-modal-body {
+    padding: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group:last-of-type {
+    margin-bottom: 0;
+}
+
+.form-group label {
+    display: block;
+    color: var(--text-primary);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: var(--bg-dark);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 0.9375rem;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: var(--bg-hover);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.form-group input::placeholder {
+    color: var(--text-muted);
+}
+
+.form-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    justify-content: flex-end;
+}
+
+.btn-cancel,
+.btn-submit {
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    font-family: inherit;
+}
+
+.btn-cancel {
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    border: 2px solid var(--border);
+}
+
+.btn-cancel:hover {
+    background: var(--bg-hover);
+    border-color: var(--text-muted);
+}
+
+.btn-submit {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-submit:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+.clear-search:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+/* Kategoriler Bölümü - Araç Multimedya Optimizasyonu */
+.categories-section {
+    width: 100%;
+    padding: 1rem 1.5rem 0.75rem 1.5rem;
+    background: var(--bg-dark);
+    border-bottom: 2px solid var(--border);
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) var(--bg-dark);
+    box-sizing: border-box;
+    /* Optimize for responsive performance */
+    will-change: scroll-position;
+    contain: layout style;
+}
+
+.categories-section::-webkit-scrollbar {
+    height: 8px;
+}
+
+.categories-section::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+.categories-section::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+}
+
+.categories-section::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+.view-menu-btn {
+    background: var(--bg-card);
+    border: 3px solid var(--border);
+    border-radius: 14px;
+    padding: 0.875rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    min-height: 56px;
+}
+
+.view-menu-btn:hover {
+    background: var(--bg-hover);
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+.view-menu-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    stroke-width: 2.5;
+}
+
+
+.categories-container {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: visible;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding-bottom: 0.75rem;
+    width: max-content;
+    min-width: 100%;
+}
+
+.category-card {
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 1rem 0.875rem;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 90px;
+    min-width: 90px;
+    max-width: 90px;
+    justify-content: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 16px;
+}
+
+.category-card:hover {
+    transform: translateY(-6px) scale(1.05);
+    border-color: var(--primary);
+    background: linear-gradient(135deg, var(--bg-hover) 0%, rgba(99, 102, 241, 0.1) 100%);
+    box-shadow: 0 12px 24px rgba(99, 102, 241, 0.25);
+}
+
+.category-card:hover::before {
+    opacity: 1;
+}
+
+.category-card.active {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-color: var(--primary);
+    box-shadow: 0 12px 28px rgba(99, 102, 241, 0.5);
+    transform: translateY(-6px) scale(1.05);
+}
+
+.category-card.active::before {
+    opacity: 0;
+}
+
+.category-icon {
+    font-size: 2rem;
+    margin-bottom: 0;
+    line-height: 1;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.category-card:hover .category-icon {
+    transform: scale(1.15) rotate(5deg);
+}
+
+.category-card.active .category-icon {
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+    transform: scale(1.1);
+}
+
+.category-name {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    line-height: 1.3;
+    letter-spacing: 0.03em;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.category-card.active .category-name {
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Kanallar Bölümü - Araç Multimedya Optimizasyonu */
+.channels-section {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 1.25rem 1.5rem 2.5rem 1.5rem;
+    box-sizing: border-box;
+    /* Optimize for responsive performance */
+    contain: layout style;
+}
+
+.channels-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.channels-header h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+}
+
+.channel-count {
+    background: var(--bg-card);
+    padding: 0.625rem 1.25rem;
+    border-radius: 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border: 2px solid var(--border);
+}
+
+.channels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+    contain: layout style paint;
+    will-change: contents;
+}
+
+/* Büyük Kart Görünümü - Araç Multimedya Optimizasyonu */
+.channels-grid.view-large {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.25rem;
+}
+
+.channels-grid.view-large .channel-card {
+    min-height: 180px;
+    padding: 1rem;
+}
+
+.channels-grid.view-large .channel-logo,
+.channels-grid.view-large .channel-logo-placeholder {
+    width: 80px;
+    height: 80px;
+}
+
+.channels-grid.view-large .channel-name {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Küçük Kart Görünümü - Araç Multimedya Optimizasyonu */
+.channels-grid.view-small {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.875rem;
+}
+
+.channels-grid.view-small .channel-card {
+    min-height: 130px;
+    padding: 0.75rem;
+}
+
+.channels-grid.view-small .channel-logo,
+.channels-grid.view-small .channel-logo-placeholder {
+    width: 56px;
+    height: 56px;
+}
+
+.channels-grid.view-small .channel-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.channels-grid.view-small .channel-category {
+    font-size: 0.75rem;
+}
+
+/* Liste Görünümü */
+.channels-grid.view-list {
+    grid-template-columns: 1fr;
+    gap: 0.375rem;
+}
+
+.channels-grid.view-list .channel-card {
+    min-height: auto;
+    padding: 0.625rem 0.875rem;
+    flex-direction: row;
+    text-align: left;
+    justify-content: flex-start;
+    gap: 0.75rem;
+}
+
+.channels-grid.view-list .channel-logo,
+.channels-grid.view-list .channel-logo-placeholder {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+}
+
+.channels-grid.view-list .channel-name {
+    font-size: 0.8125rem;
+    margin-bottom: 0.125rem;
+    text-align: left;
+}
+
+.channels-grid.view-list .channel-category {
+    font-size: 0.6875rem;
+}
+
+.channels-grid.view-list .channel-info-list {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.channel-card {
+    background: var(--bg-card);
+    border: 3px solid var(--border);
+    border-radius: 14px;
+    padding: 0.875rem;
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    will-change: transform;
+    contain: layout style paint;
+    transform: translateZ(0); /* GPU acceleration */
+}
+
+.channel-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(79, 70, 229, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.channel-card:hover {
+    transform: translate3d(0, -3px, 0); /* GPU acceleration - daha hafif hover */
+    border-color: var(--primary);
+    box-shadow: 0 6px 12px var(--shadow-lg);
+}
+
+.channel-card:hover::before {
+    opacity: 1;
+}
+
+.channel-logo {
+    width: 68px;
+    height: 68px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: var(--bg-dark);
+    will-change: opacity;
+    transform: translateZ(0); /* GPU acceleration */
+    padding: 0.25rem;
+    position: relative;
+    z-index: 1;
+}
+
+.channel-logo-placeholder {
+    width: 68px;
+    height: 68px;
+    background: var(--bg-dark);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.channel-name {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    line-height: 1.3;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+}
+
+.channel-category {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+/* Video Modal */
+.video-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.video-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.video-modal-content {
+    width: 95%;
+    max-width: 1400px;
+    position: relative;
+    background: var(--bg-card);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px var(--shadow-lg);
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.close-modal:hover {
+    background: var(--danger);
+    transform: rotate(90deg);
+}
+
+.close-modal:active {
+    transform: rotate(90deg) scale(0.95);
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+    background: #000;
+}
+
+.video-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-dark);
+    z-index: 2;
+}
+
+.placeholder-content {
+    text-align: center;
+}
+
+.placeholder-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.placeholder-content h2 {
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+}
+
+.placeholder-content .telegram-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--primary);
+}
+
+.placeholder-content .telegram-link:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.placeholder-content .brand-name {
+    margin-top: 0.75rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.loading-overlay.active {
+    display: flex;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--border);
+    border-top: 4px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-overlay p {
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.video-player,
+.iframe-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    z-index: 1;
+}
+
+.video-info {
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+}
+
+.video-info h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.video-info p {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+/* Tesla Ekranları için Özel Tasarım */
+/* Yatay Mod (Landscape) */
+.tesla-screen.tesla-landscape .app-container {
+    max-width: 100%;
+    padding: 1rem 1.5rem;
+}
+
+.tesla-screen.tesla-landscape .search-header {
+    padding: 1rem 0;
+}
+
+.tesla-screen.tesla-landscape .search-container {
+    max-width: 100%;
+    gap: 1rem;
+}
+
+.tesla-screen.tesla-landscape .categories-section {
+    padding: 0.75rem 0;
+}
+
+.tesla-screen.tesla-landscape .categories-container {
+    gap: 0.5rem;
+    padding-bottom: 0.75rem;
+}
+
+.tesla-screen.tesla-landscape .category-card {
+    min-width: 70px;
+    max-width: 70px;
+    min-height: 70px;
+    padding: 0.625rem;
+}
+
+.tesla-screen.tesla-landscape .category-icon {
+    font-size: 1.5rem;
+}
+
+.tesla-screen.tesla-landscape .category-name {
+    font-size: 0.75rem;
+}
+
+.tesla-screen.tesla-landscape .channels-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+}
+
+.tesla-screen.tesla-landscape .channels-grid.view-large {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.tesla-screen.tesla-landscape .channels-grid.view-small {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 0.5rem;
+}
+
+.tesla-screen.tesla-landscape .channel-card {
+    min-height: 130px;
+    padding: 0.75rem;
+    border-radius: 12px;
+}
+
+.tesla-screen.tesla-landscape .channel-logo,
+.tesla-screen.tesla-landscape .channel-logo-placeholder {
+    width: 60px;
+    height: 60px;
+}
+
+.tesla-screen.tesla-landscape .channel-name {
+    font-size: 0.8125rem;
+}
+
+.tesla-screen.tesla-landscape .channel-category {
+    font-size: 0.6875rem;
+}
+
+/* Dikey Mod (Portrait) */
+.tesla-screen.tesla-portrait .app-container {
+    max-width: 100%;
+    padding: 0.75rem 1rem;
+}
+
+.tesla-screen.tesla-portrait .search-header {
+    padding: 0.75rem 0;
+}
+
+.tesla-screen.tesla-portrait .categories-section {
+    padding: 0.5rem 0;
+}
+
+.tesla-screen.tesla-portrait .categories-container {
+    gap: 0.375rem;
+    padding-bottom: 0.5rem;
+}
+
+.tesla-screen.tesla-portrait .category-card {
+    min-width: 60px;
+    max-width: 60px;
+    min-height: 60px;
+    padding: 0.5rem;
+}
+
+.tesla-screen.tesla-portrait .category-icon {
+    font-size: 1.25rem;
+}
+
+.tesla-screen.tesla-portrait .category-name {
+    font-size: 0.6875rem;
+}
+
+.tesla-screen.tesla-portrait .channels-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.625rem;
+}
+
+.tesla-screen.tesla-portrait .channels-grid.view-large {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.75rem;
+}
+
+.tesla-screen.tesla-portrait .channels-grid.view-small {
+    grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+    gap: 0.5rem;
+}
+
+.tesla-screen.tesla-portrait .channel-card {
+    min-height: 115px;
+    padding: 0.625rem;
+}
+
+.tesla-screen.tesla-portrait .channel-logo,
+.tesla-screen.tesla-portrait .channel-logo-placeholder {
+    width: 54px;
+    height: 54px;
+}
+
+.tesla-screen.tesla-portrait .channel-name {
+    font-size: 0.75rem;
+}
+
+.tesla-screen.tesla-portrait .channel-category {
+    font-size: 0.625rem;
+}
+
+/* Tesla Player Sayfası - Yatay Mod */
+.tesla-screen.tesla-landscape .player-page {
+    height: 100vh;
+}
+
+.tesla-screen.tesla-landscape .player-categories-section {
+    padding: 0.875rem 1rem 0.625rem 1rem;
+}
+
+.tesla-screen.tesla-landscape .player-categories-container {
+    gap: 0.625rem;
+    justify-content: flex-end;
+}
+
+.tesla-screen.tesla-landscape .player-categories-section .category-card {
+    min-width: 65px;
+    max-width: 65px;
+    min-height: 65px;
+    padding: 0.625rem;
+}
+
+.tesla-screen.tesla-landscape .player-categories-section .category-icon {
+    font-size: 1.375rem;
+}
+
+.tesla-screen.tesla-landscape .player-categories-section .category-name {
+    font-size: 0.6875rem;
+}
+
+.tesla-screen.tesla-landscape .player-sidebar {
+    width: 250px;
+    min-width: 250px;
+    max-width: 250px;
+}
+
+.tesla-screen.tesla-landscape .player-main {
+    flex: 1;
+}
+
+/* Tesla Player Sayfası - Dikey Mod */
+.tesla-screen.tesla-portrait .player-page {
+    height: 100vh;
+    flex-direction: column;
+}
+
+.tesla-screen.tesla-portrait .player-content-wrapper {
+    flex-direction: column;
+    flex: 1;
+}
+
+.tesla-screen.tesla-portrait .player-categories-section {
+    padding: 0.625rem 0.75rem 0.5rem 0.75rem;
+}
+
+.tesla-screen.tesla-portrait .player-categories-container {
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.tesla-screen.tesla-portrait .player-categories-section .category-card {
+    min-width: 58px;
+    max-width: 58px;
+    min-height: 58px;
+    padding: 0.5rem;
+}
+
+.tesla-screen.tesla-portrait .player-categories-section .category-icon {
+    font-size: 1.125rem;
+}
+
+.tesla-screen.tesla-portrait .player-categories-section .category-name {
+    font-size: 0.625rem;
+}
+
+.tesla-screen.tesla-portrait .player-sidebar {
+    width: 100%;
+    max-height: 40vh;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+.tesla-screen.tesla-portrait .channels-sidebar-list {
+    max-height: calc(40vh - 120px);
+}
+
+.tesla-screen.tesla-portrait .player-main {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.tesla-screen.tesla-portrait .video-container-player {
+    flex: 1;
+    min-height: 0;
+}
+
+/* Responsive */
+/* Araç Multimedya Ekranları için Optimizasyon - Büyük Ekranlar (1024px+) */
+/* Use min-width first for better performance */
+@media (orientation: landscape) and (min-width: 1024px) and (max-width: 1920px) and (min-height: 600px) and (max-height: 1200px) {
+    .search-header {
+        padding: 1.5rem 2rem;
+    }
+
+    .search-container {
+        gap: 1.5rem;
+        padding: 0 2rem;
+    }
+
+    .zoom-toggle-btn,
+    .view-menu-btn {
+        width: 64px;
+        height: 64px;
+        min-width: 64px;
+        min-height: 64px;
+    }
+
+    .zoom-toggle-btn svg,
+    .view-menu-btn svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .color-picker-btn {
+        width: 43px;
+        height: 43px;
+        min-width: 43px;
+        min-height: 43px;
+    }
+
+    .search-box input {
+        padding: 1.125rem 1.5rem 1.125rem 4rem;
+        font-size: 1.25rem;
+        min-height: 64px;
+    }
+
+    .search-icon {
+        width: 28px;
+        height: 28px;
+        left: 1.5rem;
+    }
+
+    .categories-section {
+        padding: 1.25rem 2rem 1rem 2rem;
+    }
+
+    .category-card {
+        min-height: 90px;
+        min-width: 90px;
+        max-width: 90px;
+        padding: 0.875rem 1rem;
+    }
+
+    .category-icon {
+        font-size: 2rem;
+    }
+
+    .category-name {
+        font-size: 0.875rem;
+    }
+
+    .channels-section {
+        padding: 1.5rem 2rem 3rem 2rem;
+    }
+
+    .channels-header h2 {
+        font-size: 2rem;
+    }
+
+    .channel-count {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.125rem;
+    }
+
+    .channels-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 1.25rem;
+    }
+
+    .channels-grid.view-large {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .channels-grid.view-large .channel-card {
+        min-height: 200px;
+        padding: 1.25rem;
+    }
+
+    .channels-grid.view-large .channel-logo,
+    .channels-grid.view-large .channel-logo-placeholder {
+        width: 90px;
+        height: 90px;
+    }
+
+    .channels-grid.view-small {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1rem;
+    }
+
+    .channel-card {
+        padding: 1rem;
+        min-height: 170px;
+        border-radius: 16px;
+    }
+
+    .channel-logo,
+    .channel-logo-placeholder {
+        width: 75px;
+        height: 75px;
+    }
+
+    .channel-name {
+        font-size: 1rem;
+    }
+
+    .channel-category {
+        font-size: 0.8125rem;
+    }
+
+    .categories-container {
+        gap: 0.375rem;
+        padding-bottom: 0.375rem;
+    }
+
+    .category-card {
+        padding: 0.5rem;
+        min-height: 50px;
+        min-width: 48px;
+        max-width: 48px;
+    }
+}
+
+/* Orta Boy Araç Multimedya Ekranları (900px - 1024px) */
+/* Use min-width first for better performance */
+@media (min-width: 900px) and (max-width: 1024px) {
+    .search-header {
+        padding: 1.125rem 1.25rem;
+    }
+
+    .search-container {
+        padding: 0 1.25rem;
+    }
+
+    .zoom-toggle-btn,
+    .view-menu-btn {
+        width: 52px;
+        height: 52px;
+        min-width: 52px;
+        min-height: 52px;
+    }
+
+    .color-picker-btn {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        min-height: 36px;
+    }
+
+    .search-box input {
+        padding: 0.9375rem 1.125rem 0.9375rem 3.25rem;
+        font-size: 1.0625rem;
+        min-height: 52px;
+    }
+
+    .category-card {
+        min-height: 75px;
+        min-width: 75px;
+        max-width: 75px;
+        padding: 0.75rem 0.875rem;
+    }
+
+    .category-icon {
+        font-size: 1.625rem;
+    }
+
+    .category-name {
+        font-size: 0.75rem;
+    }
+
+    .channels-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+
+    .channel-card {
+        min-height: 150px;
+        padding: 0.875rem;
+    }
+
+    .channel-logo,
+    .channel-logo-placeholder {
+        width: 68px;
+        height: 68px;
+    }
+
+    .channel-name {
+        font-size: 0.9375rem;
+    }
+}
+
+/* Tablet and smaller */
+@media (max-width: 1024px) {
+    .categories-container {
+        gap: 0.625rem;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+    }
+
+    .category-card {
+        min-width: 70px;
+        max-width: 70px;
+        padding: 0.625rem 0.75rem;
+        min-height: 70px;
+    }
+
+    .category-icon {
+        font-size: 1.5rem;
+    }
+
+    .category-name {
+        font-size: 0.6875rem;
+    }
+}
+
+/* Küçük Araç Multimedya Ekranları (480px - 900px) */
+/* Use min-width first for better performance */
+@media (min-width: 480px) and (max-width: 900px) {
+    .search-header {
+        padding: 1rem 1.125rem;
+    }
+
+    .search-container {
+        padding: 0 1.125rem;
+    }
+
+    .zoom-toggle-btn,
+    .view-menu-btn {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        min-height: 48px;
+    }
+
+    .color-picker-btn {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        min-height: 32px;
+    }
+
+    .search-box input {
+        padding: 0.875rem 1rem 0.875rem 3rem;
+        font-size: 1rem;
+        min-height: 48px;
+    }
+
+    .category-card {
+        min-height: 70px;
+        min-width: 70px;
+        max-width: 70px;
+    }
+
+    .category-icon {
+        font-size: 1.5rem;
+    }
+
+    .channels-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 0.875rem;
+    }
+
+    .channel-card {
+        min-height: 140px;
+        padding: 0.75rem;
+    }
+
+    .channel-logo,
+    .channel-logo-placeholder {
+        width: 60px;
+        height: 60px;
+    }
+
+    .channel-name {
+        font-size: 0.875rem;
+    }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .search-container {
+        gap: 0.5rem;
+        padding: 0 0.75rem;
+    }
+
+    .header-left-group {
+        gap: 0.5rem;
+        flex-shrink: 1;
+        min-width: 0;
+        max-width: calc(100% - 200px);
+    }
+
+    .logo-container {
+        height: 24px;
+        padding: 0.1rem 0.25rem;
+        flex-shrink: 0;
+    }
+
+    .header-logo {
+        height: 20px;
+        max-width: 80px;
+    }
+
+    .color-picker-container {
+        gap: 0.25rem;
+        flex-shrink: 1;
+        min-width: 0;
+    }
+
+    .zoom-toggle-btn,
+    .view-menu-btn {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .view-menu-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .color-picker-btn {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        min-height: 24px;
+    }
+
+    .search-box {
+        max-width: 100%;
+    }
+
+    .categories-section {
+        padding: 0.625rem 0.75rem 0.5rem 0.75rem;
+    }
+
+    .categories-container {
+        gap: 0.375rem;
+        padding-bottom: 0.5rem;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+    }
+
+    .category-card {
+        padding: 0.5rem;
+        min-height: 55px;
+        min-width: 50px;
+        max-width: 50px;
+    }
+
+    .category-icon {
+        font-size: 1rem;
+    }
+
+    .category-name {
+        font-size: 0.5625rem;
+        line-height: 1.1;
+    }
+
+    .channels-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 0.5rem;
+    }
+
+    .channels-grid.view-large {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .channels-grid.view-small {
+        grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+    }
+
+    .channel-card {
+        padding: 0.5rem;
+        min-height: 105px;
+    }
+
+    .channel-logo,
+    .channel-logo-placeholder {
+        width: 48px;
+        height: 48px;
+    }
+
+    .channel-name {
+        font-size: 0.875rem;
+    }
+
+    .video-modal-content {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    .close-modal {
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 36px;
+        height: 36px;
+        font-size: 0.875rem;
+    }
+
+
+    .channels-header h2 {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-container {
+        padding: 0 0.5rem;
+        gap: 0.4rem;
+    }
+
+    .header-left-group {
+        gap: 0.4rem;
+        max-width: calc(100% - 180px);
+    }
+
+    .logo-container {
+        height: 22px;
+        padding: 0.1rem 0.2rem;
+    }
+
+    .header-logo {
+        height: 18px;
+        max-width: 60px;
+    }
+
+    .color-picker-container {
+        gap: 0.2rem;
+    }
+
+    .color-picker-btn {
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        min-height: 20px;
+    }
+
+    .color-picker-btn.active::after {
+        font-size: 11px;
+    }
+
+    .search-box input {
+        padding: 0.75rem 0.875rem 0.75rem 2.5rem;
+        font-size: 0.9375rem;
+    }
+
+    .categories-section {
+        padding: 0.5rem 0.5rem 0.375rem 0.5rem;
+    }
+
+    .categories-container {
+        gap: 0.25rem;
+        padding-bottom: 0.5rem;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+    }
+
+    .category-card {
+        padding: 0.375rem;
+        min-height: 50px;
+        min-width: 48px;
+        max-width: 48px;
+    }
+
+    .category-icon {
+        font-size: 0.875rem;
+    }
+
+    .category-name {
+        font-size: 0.5rem;
+        line-height: 1;
+    }
+
+    .channels-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .channel-card {
+        min-height: 140px;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+    .search-container {
+        padding: 0 0.4rem;
+        gap: 0.3rem;
+    }
+
+    .header-left-group {
+        gap: 0.3rem;
+        max-width: calc(100% - 160px);
+    }
+
+    .logo-container {
+        height: 20px;
+        padding: 0.08rem 0.15rem;
+    }
+
+    .header-logo {
+        height: 16px;
+        max-width: 50px;
+    }
+
+    .color-picker-container {
+        gap: 0.15rem;
+    }
+
+    .color-picker-btn {
+        width: 18px;
+        height: 18px;
+        min-width: 18px;
+        min-height: 18px;
+    }
+
+    .color-picker-btn.active::after {
+        font-size: 10px;
+    }
+
+    .categories-section {
+        padding: 0.5rem 0.375rem 0.375rem 0.375rem;
+    }
+
+    .categories-container {
+        gap: 0.25rem;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+    }
+
+    .category-card {
+        padding: 0.375rem;
+        min-height: 48px;
+        min-width: 45px;
+        max-width: 45px;
+    }
+
+    .category-icon {
+        font-size: 0.8125rem;
+    }
+
+    .category-name {
+        font-size: 0.5rem;
+    }
+}
+
+/* Player Page Styles */
+.player-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: var(--bg-dark);
+    position: relative;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.player-categories-section {
+    padding: 1rem 1.5rem 0.75rem 1.5rem;
+    background: var(--bg-dark);
+    border-bottom: 2px solid var(--border);
+    flex-shrink: 0;
+    /* Optimize for responsive performance */
+    will-change: scroll-position;
+    contain: layout style;
+    /* Touch scrolling için */
+    touch-action: pan-x;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.player-categories-container {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding-bottom: 0.5rem;
+    width: 100%;
+    min-width: 0;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) var(--bg-dark);
+    user-select: none;
+    -webkit-user-select: none;
+    /* Touch scrolling için gerekli özellikler */
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
+    overscroll-behavior-y: none;
+    /* Momentum scrolling için iOS */
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling */
+    scroll-snap-type: none;
+    /* İçerik genişliğini koru - flex item'ların genişliği içeriğe göre ayarlanacak */
+    box-sizing: border-box;
+}
+
+.player-categories-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.player-categories-container::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+    border-radius: 4px;
+}
+
+.player-categories-container::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.player-categories-container::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Player Page Category Cards - Base Styles */
+.player-categories-section .category-card {
+    background: var(--bg-card);
+    border: 3px solid var(--border);
+    border-radius: 14px;
+    padding: 0.75rem 0.875rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.375rem;
+    min-height: 80px;
+    min-width: 80px;
+    max-width: 80px;
+    width: 80px;
+    justify-content: center;
+    flex-shrink: 0;
+    flex-grow: 0;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    /* Touch scrolling için - kartların kendisi scroll'u engellememeli */
+    touch-action: pan-x pan-y;
+    pointer-events: auto;
+}
+
+.player-categories-section .category-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary);
+    background: var(--bg-hover);
+    box-shadow: 0 8px 16px var(--shadow);
+}
+
+.player-categories-section .category-card.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-color: var(--primary);
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+    transform: translateY(-4px);
+}
+
+.player-categories-section .category-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0;
+    line-height: 1;
+}
+
+.player-categories-section .category-name {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+}
+
+.player-categories-section .category-card.active .category-name {
+    color: white;
+}
+
+/* Player Page Category Cards - Responsive */
+/* Büyük Ekranlar (1024px+) */
+@media (min-width: 1024px) {
+    .player-categories-section {
+        padding: 1.25rem 2rem 1rem 2rem;
+    }
+
+    .player-categories-container {
+        gap: 1rem;
+        padding-bottom: 0.75rem;
+    }
+
+    .player-categories-section .category-card {
+        min-height: 90px;
+        min-width: 90px;
+        max-width: 90px;
+        padding: 0.875rem 1rem;
+    }
+
+    .player-categories-section .category-icon {
+        font-size: 2rem;
+    }
+
+    .player-categories-section .category-name {
+        font-size: 0.875rem;
+    }
+}
+
+/* Orta Ekranlar (900px - 1024px) */
+@media (min-width: 900px) and (max-width: 1024px) {
+    .player-categories-section {
+        padding: 1rem 1.25rem 0.75rem 1.25rem;
+    }
+
+    .player-categories-container {
+        gap: 0.75rem;
+        padding-bottom: 0.625rem;
+    }
+
+    .player-categories-section .category-card {
+        min-height: 75px;
+        min-width: 75px;
+        max-width: 75px;
+        padding: 0.75rem 0.875rem;
+    }
+
+    .player-categories-section .category-icon {
+        font-size: 1.625rem;
+    }
+
+    .player-categories-section .category-name {
+        font-size: 0.75rem;
+    }
+}
+
+/* Küçük Ekranlar (480px - 900px) */
+@media (min-width: 480px) and (max-width: 900px) {
+    .player-categories-section {
+        padding: 0.875rem 1rem 0.625rem 1rem;
+    }
+
+    .player-categories-container {
+        gap: 0.625rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .player-categories-section .category-card {
+        min-height: 70px;
+        min-width: 70px;
+        max-width: 70px;
+        padding: 0.625rem 0.75rem;
+    }
+
+    .player-categories-section .category-icon {
+        font-size: 1.5rem;
+    }
+
+    .player-categories-section .category-name {
+        font-size: 0.6875rem;
+    }
+}
+
+/* Çok Küçük Ekranlar (480px altı) */
+@media (max-width: 480px) {
+    .player-categories-section {
+        padding: 0.75rem 0.875rem 0.5rem 0.875rem;
+    }
+
+    .player-categories-container {
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 0.5rem;
+    }
+    
+    .player-categories-section .category-card {
+        min-height: 65px;
+        min-width: 65px;
+        max-width: 65px;
+        padding: 0.5rem 0.625rem;
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+    
+    .player-categories-section .category-icon {
+        font-size: 1.375rem;
+    }
+    
+    .player-categories-section .category-name {
+        font-size: 0.625rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .player-categories-container {
+        flex-wrap: nowrap;
+        gap: 0.2rem;
+        overflow-x: auto;
+        justify-content: flex-start;
+    }
+    
+    .player-categories-section .category-card {
+        min-height: 42px;
+        min-width: 42px;
+        max-width: 42px;
+        padding: 0.3rem;
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+    
+    .player-categories-section .category-icon {
+        font-size: 0.8125rem;
+    }
+    
+    .player-categories-section .category-name {
+        font-size: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .player-categories-container {
+        flex-wrap: nowrap;
+        gap: 0.15rem;
+        overflow-x: auto;
+        justify-content: flex-start;
+    }
+    
+    .player-categories-section .category-card {
+        min-height: 38px;
+        min-width: 38px;
+        max-width: 38px;
+        padding: 0.25rem;
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+    
+    .player-categories-section .category-icon {
+        font-size: 0.75rem;
+    }
+    
+    .player-categories-section .category-name {
+        font-size: 0.4375rem;
+    }
+}
+
+/* Çok Küçük Ekranlar (360px altı) */
+@media (max-width: 360px) {
+    .player-categories-section {
+        padding: 0.625rem 0.75rem 0.5rem 0.75rem;
+    }
+
+    .player-categories-container {
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary) var(--bg-dark);
+        justify-content: flex-start;
+        padding-bottom: 0.5rem;
+    }
+    
+    .player-categories-section .category-card {
+        min-height: 60px;
+        min-width: 60px;
+        max-width: 60px;
+        padding: 0.5rem;
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+    
+    .player-categories-section .category-icon {
+        font-size: 1.25rem;
+    }
+    
+    .player-categories-section .category-name {
+        font-size: 0.5625rem;
+    }
+}
+
+.player-content-wrapper {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    margin-top: 62px; /* Header yüksekliği için */
+    /* Taşmayı önle */
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.player-sidebar {
+    width: 250px;
+    min-width: 250px;
+    max-width: 250px;
+    background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-dark) 100%);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex-shrink: 0;
+    height: calc(100vh - 62px); /* Header yüksekliği çıkar */
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease, width 0.3s ease, min-width 0.3s ease, max-width 0.3s ease;
+}
+
+.player-content-wrapper.sidebar-hidden #channelsSidebar {
+    transform: translateX(-100%);
+    width: 0;
+    min-width: 0;
+    max-width: 0;
+    overflow: hidden;
+    border-right: none;
+    opacity: 0;
+}
+
+.player-content-wrapper.sidebar-hidden .player-main {
+    flex: 1;
+    width: 100%;
+    max-width: 100%;
+}
+
+.player-content-wrapper.sidebar-hidden .video-container-player {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Mobile responsive - sidebar hidden state */
+@media (max-width: 900px) {
+    .player-content-wrapper.sidebar-hidden #channelsSidebar {
+        max-height: 0;
+        transform: translateY(-100%);
+        border-bottom: none;
+    }
+}
+
+
+.sidebar-header {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-dark) 100%);
+    backdrop-filter: blur(10px);
+    justify-content: space-between;
+}
+
+.sidebar-header .zoom-toggle-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--bg-dark);
+    border: 1.5px solid var(--border);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    padding: 0;
+    margin-left: auto;
+}
+
+.sidebar-header .zoom-toggle-btn:hover {
+    background: var(--bg-hover);
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+.sidebar-header .zoom-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.sidebar-header .zoom-toggle-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.back-btn {
+    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-card) 100%);
+    border: 1.5px solid var(--border);
+    color: var(--text-primary);
+    padding: 0.5rem 0.75rem;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: inherit;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn:hover {
+    background: linear-gradient(135deg, var(--bg-hover) 0%, var(--bg-card) 100%);
+    border-color: var(--primary);
+    transform: translateX(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.back-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.sidebar-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.sidebar-tabs {
+    display: flex;
+    padding: 0.75rem;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 0.625rem;
+    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-card) 100%);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: inherit;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tab-btn:hover {
+    background: linear-gradient(135deg, var(--bg-hover) 0%, var(--bg-card) 100%);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-color: var(--primary);
+    color: white;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), 0 0 0 2px var(--primary-light);
+    transform: translateY(-2px);
+    font-weight: 600;
+}
+
+
+/* Arama Kutucukları - Sidebar'larda */
+.search-box-category,
+.search-box-channel {
+    position: relative;
+    padding: 0.75rem;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 10;
+}
+
+.search-box-category .search-icon,
+.search-box-channel .search-icon {
+    position: absolute;
+    left: 1.5rem;
+    color: var(--text-muted);
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.search-box-category input,
+.search-box-channel input {
+    width: 100%;
+    padding: 0.625rem 2.5rem 0.625rem 2.75rem;
+    background: var(--bg-hover);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.search-box-category input:focus,
+.search-box-channel input:focus {
+    border-color: var(--primary);
+    background: var(--bg-card);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+.search-box-category input::placeholder,
+.search-box-channel input::placeholder {
+    color: var(--text-muted);
+}
+
+.clear-search-btn {
+    position: absolute;
+    right: 1.5rem;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.125rem;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    padding: 0;
+    line-height: 1;
+    z-index: 2;
+}
+
+.clear-search-btn:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.channels-sidebar-list,
+.categories-sidebar-list {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0.5rem;
+    min-height: 0;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    scroll-behavior: smooth;
+    contain: layout style paint;
+}
+
+.channel-sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-dark) 100%);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 0.4rem;
+    contain: layout style paint;
+    transform: translateZ(0); /* GPU acceleration */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.channel-sidebar-item:hover {
+    background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 15%, transparent) 0%, color-mix(in srgb, var(--primary) 8%, transparent) 100%);
+    border-color: var(--primary);
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 25%, transparent), 0 0 0 1px color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+.channel-sidebar-item.active {
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+    border-color: var(--primary);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 40%, transparent), 0 0 0 2px var(--primary-light);
+    transform: translateX(4px);
+}
+
+.channel-sidebar-item.active .channel-sidebar-name {
+    color: white;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.channel-sidebar-item.active .channel-sidebar-category {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.channel-sidebar-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.channel-sidebar-logo,
+.channel-sidebar-logo-placeholder {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    object-fit: contain;
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-dark) 100%);
+    border: 1.5px solid var(--border);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.channel-sidebar-item:hover .channel-sidebar-logo,
+.channel-sidebar-item:hover .channel-sidebar-logo-placeholder {
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 30%, transparent);
+    transform: scale(1.05);
+}
+
+.channel-sidebar-item.active .channel-sidebar-logo,
+.channel-sidebar-item.active .channel-sidebar-logo-placeholder {
+    border-color: var(--primary);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 40%, transparent), 0 0 0 2px var(--primary-light);
+    transform: scale(1.05);
+}
+
+.channel-sidebar-logo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.channel-sidebar-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.channel-sidebar-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.channel-sidebar-category {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.favorite-sidebar-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.favorite-sidebar-btn:hover {
+    background: var(--bg-hover);
+    color: var(--primary);
+    transform: scale(1.1);
+}
+
+.category-sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-dark) 100%);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 0.4rem;
+    contain: layout style paint;
+    transform: translateZ(0); /* GPU acceleration */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category-sidebar-item:hover {
+    background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 15%, transparent) 0%, color-mix(in srgb, var(--primary) 8%, transparent) 100%);
+    border-color: var(--primary);
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 25%, transparent), 0 0 0 1px color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+.category-sidebar-item.active {
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+    border-color: var(--primary);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 40%, transparent), 0 0 0 2px var(--primary-light);
+    transform: translateX(4px);
+}
+
+.category-sidebar-item.active .category-sidebar-name {
+    color: white;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.category-sidebar-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-dark) 100%);
+    border: 1.5px solid var(--border);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-sidebar-item:hover .category-sidebar-icon {
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 30%, transparent);
+    transform: scale(1.05);
+}
+
+.category-sidebar-item.active .category-sidebar-icon {
+    border-color: var(--primary);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 40%, transparent), 0 0 0 2px var(--primary-light);
+    transform: scale(1.05);
+}
+
+.category-sidebar-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.category-sidebar-separator {
+    height: 1px;
+    background: var(--border);
+    margin: 0.75rem 0.5rem;
+    opacity: 0.5;
+}
+
+.player-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-width: 0;
+    min-height: 0;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    z-index: 1;
+    /* Taşmayı önle */
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+/* Portrait-mode aktifse ve player-view-mode yoksa player-main gizli (genel kural) */
+.player-content-wrapper.portrait-mode:not(.player-view-mode) .player-main {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    flex: 0 !important;
+}
+
+.video-container-player {
+    flex: 1;
+    position: relative;
+    background: #000;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* Responsive için */
+    min-height: 300px;
+    /* Zoom uygulandığında düzgün görünmesi için */
+    box-sizing: border-box;
+    /* Zoom'dan etkilenmemesi için - JavaScript ile ters scale uygulanacak */
+    will-change: transform;
+    /* Ekrandan taşmaması için */
+    contain: layout style paint;
+    /* Taşmayı önle */
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.video-placeholder-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-dark);
+    z-index: 2;
+}
+
+.video-container-player .video-player,
+.video-container-player .iframe-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    border: none;
+    outline: none;
+    z-index: 1;
+    object-fit: fill !important; /* Esneterek boşlukları kapatır */
+    background: #000;
+    /* Zoom'dan etkilenmemesi için */
+    /* Taşmayı önle - içerik container'a sığsın */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* Video ölçeklendirmesi */
+    object-position: center;
+    /* Taşmayı kesinlikle önle */
+    overflow: hidden;
+    /* Touch events için */
+    pointer-events: auto;
+    touch-action: manipulation;
+}
+
+
+/* Video Player Kontrol Overlay - Dokununca/Tıklayınca görünsün */
+.video-controls-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: none; /* Başlangıçta gizli, kanal oynatılınca gösterilecek */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.video-controls-overlay.show {
+    opacity: 1;
+    pointer-events: auto !important;
+}
+
+/* Normal ekranda da kontroller tıklanabilir olmalı */
+.video-controls-overlay.show * {
+    pointer-events: auto !important;
+}
+
+/* Fullscreen modunda kontroller */
+:fullscreen .video-controls-overlay,
+:-webkit-full-screen .video-controls-overlay,
+:-moz-full-screen .video-controls-overlay,
+:-ms-fullscreen .video-controls-overlay {
+    display: none !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 99999 !important;
+    pointer-events: none !important;
+}
+
+:fullscreen .video-controls-overlay.show,
+:-webkit-full-screen .video-controls-overlay.show,
+:-moz-full-screen .video-controls-overlay.show,
+:-ms-fullscreen .video-controls-overlay.show {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Fullscreen'de kontrol düğmeleri tıklanabilir olmalı */
+:fullscreen .video-control-btn,
+:-webkit-full-screen .video-control-btn,
+:-moz-full-screen .video-control-btn,
+:-ms-fullscreen .video-control-btn {
+    pointer-events: auto !important;
+    z-index: 100000 !important;
+    position: relative !important;
+    cursor: pointer !important;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+:fullscreen .video-controls-bar,
+:-webkit-full-screen .video-controls-bar,
+:-moz-full-screen .video-controls-bar,
+:-ms-fullscreen .video-controls-bar {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+:fullscreen .video-controls-overlay,
+:-webkit-full-screen .video-controls-overlay,
+:-moz-full-screen .video-controls-overlay,
+:-ms-fullscreen .video-controls-overlay {
+    display: none !important;
+    pointer-events: none !important;
+    z-index: 99999 !important;
+}
+
+:fullscreen .video-controls-overlay *,
+:-webkit-full-screen .video-controls-overlay *,
+:-moz-full-screen .video-controls-overlay *,
+:-ms-fullscreen .video-controls-overlay * {
+    display: none !important;
+    pointer-events: none !important;
+}
+
+/* Video Player Gömülü Kontrol Çubuğu */
+.video-controls-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 70%, transparent 100%);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    width: 100%;
+    box-sizing: border-box;
+    pointer-events: auto !important;
+    z-index: 10;
+    position: relative;
+}
+
+.controls-left,
+.controls-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.controls-center {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.progress-container {
+    position: relative;
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.progress-bar::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.progress-bar::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.progress-bar::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+.progress-bar::-webkit-slider-runnable-track {
+    height: 6px;
+    background: rgba(99, 102, 241, 0.5);
+    border-radius: 3px;
+}
+
+.progress-bar::-moz-range-track {
+    height: 6px;
+    background: rgba(99, 102, 241, 0.5);
+    border-radius: 3px;
+}
+
+.progress-buffer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.3s ease;
+    z-index: 1;
+}
+
+/* Ses Kontrolü */
+.volume-slider-container {
+    display: flex;
+    align-items: center;
+    width: 80px;
+    opacity: 0;
+    transition: opacity 0.3s ease, width 0.3s ease;
+    overflow: hidden;
+}
+
+.volume-slider-container.show {
+    opacity: 1;
+}
+
+.volume-slider {
+    width: 100%;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+/* Zaman Gösterimi */
+.time-display {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    white-space: nowrap;
+    margin-left: 0.5rem;
+}
+
+.time-separator {
+    opacity: 0.7;
+}
+
+/* Hız ve Kalite Menüleri */
+.speed-menu,
+.quality-menu,
+.scale-menu {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    margin-bottom: 0.5rem;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 8px;
+    padding: 0.5rem;
+    min-width: 140px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    z-index: 20;
+}
+
+.speed-menu button,
+.quality-menu button,
+.scale-menu button {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background: transparent;
+    border: none;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    transition: background 0.2s ease;
+}
+
+.speed-menu button:hover,
+.quality-menu button:hover,
+.scale-menu button:hover {
+    background: rgba(99, 102, 241, 0.2);
+}
+
+.speed-menu button.active,
+.quality-menu button.active,
+.scale-menu button.active {
+    background: rgba(99, 102, 241, 0.4);
+    color: #fff;
+}
+
+.speed-label,
+.quality-label {
+    font-size: 0.75rem;
+    margin-left: 0.25rem;
+    font-weight: 600;
+}
+
+/* Video Kontrol Butonları - Modern İkonlar */
+.video-control-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+    flex-shrink: 0;
+    position: relative;
+    pointer-events: auto !important;
+    z-index: 1;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+    touch-action: manipulation;
+}
+
+.video-control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.video-control-btn:active {
+    transform: scale(0.95);
+}
+
+.video-control-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.video-control-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2;
+}
+
+/* Play/Pause butonu daha büyük ve vurgulu */
+.play-pause-main {
+    width: 44px;
+    height: 44px;
+    background: rgba(99, 102, 241, 0.3);
+    border-radius: 50%;
+}
+
+.play-pause-main:hover {
+    background: rgba(99, 102, 241, 0.5);
+}
+
+.play-pause-main svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Touch cihazlarda kontrol çubuğunu her zaman görünür yap */
+@media (hover: none) and (pointer: coarse) {
+    .video-controls-overlay {
+        opacity: 0.95;
+        pointer-events: auto;
+    }
+}
+
+/* Eski player-controls-bar - artık kullanılmıyor ama uyumluluk için */
+.player-controls-bar {
+    display: none !important;
+}
+
+/* Play Controls Group - Play/Pause ve küçük prev/next butonları */
+.play-controls-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Küçük Prev/Next Butonları */
+.control-btn-small {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(99, 102, 241, 0.15);
+    border: 1.5px solid rgba(99, 102, 241, 0.3);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.control-btn-small:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.4);
+}
+
+.control-btn-small:active {
+    transform: scale(0.95);
+}
+
+.control-btn-small svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2.5;
+}
+
+/* Kontrol Butonları - Modern Tasarım */
+.control-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1.5px solid rgba(99, 102, 241, 0.3);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.875rem;
+    font-weight: 600;
+    min-width: 110px;
+    height: 48px;
+    position: relative;
+    overflow: hidden;
+}
+
+.control-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.control-btn:hover::before {
+    left: 100%;
+}
+
+.control-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.4);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(var(--primary-rgb), 0.3);
+}
+
+.control-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Play/Pause Butonu - Özel Stil */
+.play-pause-btn {
+    min-width: 140px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-color: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+}
+
+.play-pause-btn:hover {
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+    box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.5);
+    transform: translateY(-2px) scale(1.02);
+}
+
+.play-pause-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.control-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.5;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.play-pause-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.control-btn:hover svg {
+    transform: scale(1.1);
+}
+
+.control-btn .btn-label {
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+}
+
+/* Eski class isimleri için uyumluluk */
+.channel-nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1.5px solid rgba(99, 102, 241, 0.3);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.875rem;
+    font-weight: 600;
+    min-width: 110px;
+    height: 48px;
+}
+
+.channel-nav-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.4);
+}
+
+/* Mobil cihazlar için */
+@media (max-width: 900px) {
+    .video-controls-bar {
+        padding: 0.75rem 0.875rem;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .controls-left,
+    .controls-right {
+        gap: 0.375rem;
+    }
+    
+    .video-control-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .video-control-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .play-pause-main {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .play-pause-main svg {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .time-display {
+        font-size: 0.75rem;
+    }
+    
+    .volume-slider-container {
+        width: 60px;
+    }
+    
+    .speed-label,
+    .quality-label {
+        display: none;
+    }
+}
+
+/* Küçük ekranlar için */
+@media (max-width: 480px) {
+    .video-controls-bar {
+        padding: 0.625rem 0.75rem;
+        gap: 0.375rem;
+    }
+    
+    .controls-left,
+    .controls-right {
+        gap: 0.25rem;
+    }
+    
+    .video-control-btn {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .video-control-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .play-pause-main {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .play-pause-main svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .time-display {
+        font-size: 0.6875rem;
+        margin-left: 0.25rem;
+    }
+    
+    .volume-slider-container {
+        width: 50px;
+    }
+}
+
+/* Android uygulama içinde ve touch cihazlarda video responsive */
+@media (hover: none) and (pointer: coarse) {
+    .video-container-player {
+        width: 100%;
+        max-width: 100vw;
+        overflow: hidden;
+        box-sizing: border-box;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .video-container-player .video-player,
+    .video-container-player .iframe-player {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100% !important;
+        max-height: 100% !important;
+        object-fit: contain !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+}
+
+/* Android uygulama içinde video responsive */
+.video-player[data-in-app="true"],
+.iframe-player[data-in-app="true"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Android WebView için özel kurallar */
+@supports (-webkit-appearance: none) {
+    .video-container-player {
+        -webkit-overflow-scrolling: touch;
+        overflow: hidden;
+    }
+    
+    .video-container-player .video-player,
+    .video-container-player .iframe-player {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+}
+
+/* Uygulama içinde video controls'u gizle */
+.video-player.no-controls::-webkit-media-controls,
+.video-player.no-controls::-webkit-media-controls-panel,
+.video-player.no-controls::-webkit-media-controls-play-button,
+.video-player.no-controls::-webkit-media-controls-timeline,
+.video-player.no-controls::-webkit-media-controls-current-time-display,
+.video-player.no-controls::-webkit-media-controls-time-remaining-display,
+.video-player.no-controls::-webkit-media-controls-mute-button,
+.video-player.no-controls::-webkit-media-controls-volume-slider,
+.video-player.no-controls::-webkit-media-controls-fullscreen-button,
+.video-player[data-in-app="true"]::-webkit-media-controls,
+.video-player[data-in-app="true"]::-webkit-media-controls-panel,
+.video-player[data-in-app="true"]::-webkit-media-controls-play-button,
+.video-player[data-in-app="true"]::-webkit-media-controls-timeline,
+.video-player[data-in-app="true"]::-webkit-media-controls-current-time-display,
+.video-player[data-in-app="true"]::-webkit-media-controls-time-remaining-display,
+.video-player[data-in-app="true"]::-webkit-media-controls-mute-button,
+.video-player[data-in-app="true"]::-webkit-media-controls-volume-slider,
+.video-player[data-in-app="true"]::-webkit-media-controls-fullscreen-button {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    height: 0 !important;
+    width: 0 !important;
+}
+
+/* Video element'inin kendisinde de controls gizleme */
+.video-player.no-controls,
+.video-player[data-in-app="true"] {
+    -webkit-appearance: none;
+}
+
+/* Tüm media controls'u gizle */
+.video-player.no-controls video::-webkit-media-controls-enclosure,
+.video-player[data-in-app="true"] video::-webkit-media-controls-enclosure {
+    display: none !important;
+}
+
+/* Fullscreen modunda video responsive */
+/* Kapsayıcıyı tam ekran yap */
+:fullscreen .video-container-player,
+:-webkit-full-screen .video-container-player,
+:-moz-full-screen .video-container-player,
+:-ms-fullscreen .video-container-player {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: #000 !important;
+    overflow: hidden !important;
+    z-index: 9999 !important;
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+}
+
+/* Fullscreen'de video player ve iframe kontrollerin altında olmalı */
+:fullscreen .video-container-player .video-player,
+:-webkit-full-screen .video-container-player .video-player,
+:-moz-full-screen .video-container-player .video-player,
+:-ms-fullscreen .video-container-player .video-player,
+:fullscreen .video-container-player .iframe-player,
+:-webkit-full-screen .video-container-player .iframe-player,
+:-moz-full-screen .video-container-player .iframe-player,
+:-ms-fullscreen .video-container-player .iframe-player {
+    z-index: 1 !important;
+    pointer-events: none !important; /* Video player tıklamaları engelle, sadece kontroller çalışsın */
+}
+
+/* Fullscreen'de cover modunda siyahlık olmaması için - JavaScript ile class eklenecek */
+:fullscreen .video-container-player .video-player.video-scale-cover,
+:-webkit-full-screen .video-container-player .video-player.video-scale-cover,
+:-moz-full-screen .video-container-player .video-player.video-scale-cover,
+:-ms-fullscreen .video-container-player .video-player.video-scale-cover,
+:fullscreen .video-container-player .iframe-player.video-scale-cover,
+:-webkit-full-screen .video-container-player .iframe-player.video-scale-cover,
+:-moz-full-screen .video-container-player .iframe-player.video-scale-cover,
+:-ms-fullscreen .video-container-player .iframe-player.video-scale-cover {
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    object-fit: cover !important;
+}
+
+/* Mobil ve Android uygulama içinde fullscreen container */
+@media (max-width: 900px) {
+    :fullscreen .video-container-player,
+    :-webkit-full-screen .video-container-player,
+    :-moz-full-screen .video-container-player,
+    :-ms-fullscreen .video-container-player {
+        width: 100vw !important;
+        height: 100vh !important;
+        min-width: 100vw !important;
+        min-height: 100vh !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+    }
+    
+    :fullscreen .video-container-player .video-player,
+    :-webkit-full-screen .video-container-player .video-player,
+    :-moz-full-screen .video-container-player .video-player,
+    :-ms-fullscreen .video-container-player .video-player,
+    :fullscreen .video-container-player .iframe-player,
+    :-webkit-full-screen .video-container-player .iframe-player,
+    :-moz-full-screen .video-container-player .iframe-player,
+    :-ms-fullscreen .video-container-player .iframe-player {
+        width: 100vw !important;
+        height: 100vh !important;
+        min-width: 100vw !important;
+        min-height: 100vh !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+    }
+}
+
+/* Touch cihazlarda fullscreen */
+@media (hover: none) and (pointer: coarse) {
+    :fullscreen .video-container-player,
+    :-webkit-full-screen .video-container-player,
+    :-moz-full-screen .video-container-player,
+    :-ms-fullscreen .video-container-player {
+        width: 100vw !important;
+        height: 100vh !important;
+        min-width: 100vw !important;
+        min-height: 100vh !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+    }
+    
+    :fullscreen .video-container-player .video-player,
+    :-webkit-full-screen .video-container-player .video-player,
+    :-moz-full-screen .video-container-player .video-player,
+    :-ms-fullscreen .video-container-player .video-player,
+    :fullscreen .video-container-player .iframe-player,
+    :-webkit-full-screen .video-container-player .iframe-player,
+    :-moz-full-screen .video-container-player .iframe-player,
+    :-ms-fullscreen .video-container-player .iframe-player {
+        width: 100vw !important;
+        height: 100vh !important;
+        min-width: 100vw !important;
+        min-height: 100vh !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+    }
+    
+    /* Mobil uygulamada tam ekranda kontroller tıklanabilir olmalı */
+    html[data-in-app="true"] :fullscreen .video-controls-overlay,
+    html[data-in-app="true"] :-webkit-full-screen .video-controls-overlay,
+    body[data-in-app="true"] :fullscreen .video-controls-overlay,
+    body[data-in-app="true"] :-webkit-full-screen .video-controls-overlay {
+        display: none !important;
+        pointer-events: none !important;
+        z-index: 99999 !important;
+    }
+    
+    html[data-in-app="true"] :fullscreen .video-control-btn,
+    html[data-in-app="true"] :-webkit-full-screen .video-control-btn,
+    body[data-in-app="true"] :fullscreen .video-control-btn,
+    body[data-in-app="true"] :-webkit-full-screen .video-control-btn {
+        pointer-events: auto !important;
+        z-index: 100000 !important;
+        position: relative !important;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    html[data-in-app="true"] :fullscreen .video-controls-bar,
+    html[data-in-app="true"] :-webkit-full-screen .video-controls-bar,
+    body[data-in-app="true"] :fullscreen .video-controls-bar,
+    body[data-in-app="true"] :-webkit-full-screen .video-controls-bar {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+    
+    /* Mobil uygulamada fullscreen modda menüler tıklanabilir olmalı */
+    html[data-in-app="true"] :fullscreen .speed-menu,
+    html[data-in-app="true"] :fullscreen .quality-menu,
+    html[data-in-app="true"] :fullscreen .scale-menu,
+    html[data-in-app="true"] :-webkit-full-screen .speed-menu,
+    html[data-in-app="true"] :-webkit-full-screen .quality-menu,
+    html[data-in-app="true"] :-webkit-full-screen .scale-menu,
+    body[data-in-app="true"] :fullscreen .speed-menu,
+    body[data-in-app="true"] :fullscreen .quality-menu,
+    body[data-in-app="true"] :fullscreen .scale-menu,
+    body[data-in-app="true"] :-webkit-full-screen .speed-menu,
+    body[data-in-app="true"] :-webkit-full-screen .quality-menu,
+    body[data-in-app="true"] :-webkit-full-screen .scale-menu {
+        pointer-events: auto !important;
+        z-index: 100001 !important;
+        position: absolute !important;
+        touch-action: manipulation !important;
+    }
+    
+    html[data-in-app="true"] :fullscreen .speed-menu button,
+    html[data-in-app="true"] :fullscreen .quality-menu button,
+    html[data-in-app="true"] :fullscreen .scale-menu button,
+    html[data-in-app="true"] :-webkit-full-screen .speed-menu button,
+    html[data-in-app="true"] :-webkit-full-screen .quality-menu button,
+    html[data-in-app="true"] :-webkit-full-screen .scale-menu button,
+    body[data-in-app="true"] :fullscreen .speed-menu button,
+    body[data-in-app="true"] :fullscreen .quality-menu button,
+    body[data-in-app="true"] :fullscreen .scale-menu button,
+    body[data-in-app="true"] :-webkit-full-screen .speed-menu button,
+    body[data-in-app="true"] :-webkit-full-screen .quality-menu button,
+    body[data-in-app="true"] :-webkit-full-screen .scale-menu button {
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    :fullscreen .video-container-player .video-player,
+    :-webkit-full-screen .video-container-player .video-player,
+    :fullscreen .video-container-player .iframe-player,
+    :-webkit-full-screen .video-container-player .iframe-player {
+        position: fixed !important;
+        object-fit: cover !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        min-width: 100vw !important;
+        min-height: 100vh !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        z-index: 9999 !important;
+    }
+}
+
+/* Fullscreen modunda video ve iframe */
+/* Videoyu esneterek (stretch) tüm boşlukları kapat */
+:fullscreen .video-container-player .video-player,
+:-webkit-full-screen .video-container-player .video-player,
+:-moz-full-screen .video-container-player .video-player,
+:-ms-fullscreen .video-container-player .video-player,
+:fullscreen #video,
+:-webkit-full-screen #video,
+:-moz-full-screen #video,
+:-ms-fullscreen #video {
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    object-fit: fill !important; /* Siyah boşluk bırakmaz, kırpma yapmaz */
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    background: #000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    z-index: 1 !important;
+}
+
+/* Mobil ve Android uygulama içinde fullscreen - tam ekran doldur */
+@media (max-width: 900px) {
+    :fullscreen .video-container-player .video-player,
+    :-webkit-full-screen .video-container-player .video-player,
+    :-moz-full-screen .video-container-player .video-player,
+    :-ms-fullscreen .video-container-player .video-player,
+    :fullscreen #video,
+    :-webkit-full-screen #video,
+    :-moz-full-screen #video,
+    :-ms-fullscreen #video {
+        width: 100% !important;
+        height: 100% !important;
+        min-width: 100vw !important;
+        min-height: 100vh !important;
+        object-fit: fill !important; /* Siyah boşluk bırakmaz, kırpma yapmaz */
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+    }
+}
+
+/* Android uygulama içinde fullscreen - tüm modlarda tam ekranı doldur */
+html[data-in-app="true"] :fullscreen .video-container-player .video-player,
+html[data-in-app="true"] :-webkit-full-screen .video-container-player .video-player,
+body[data-in-app="true"] :fullscreen .video-container-player .video-player,
+body[data-in-app="true"] :-webkit-full-screen .video-container-player .video-player,
+html[data-in-app="true"] :fullscreen #video,
+html[data-in-app="true"] :-webkit-full-screen #video,
+body[data-in-app="true"] :fullscreen #video,
+body[data-in-app="true"] :-webkit-full-screen #video {
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    object-fit: fill !important; /* Siyah boşluk bırakmaz, kırpma yapmaz */
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    z-index: 1 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+:fullscreen .video-container-player .iframe-player,
+:-webkit-full-screen .video-container-player .iframe-player,
+:-moz-full-screen .video-container-player .iframe-player,
+:-ms-fullscreen .video-container-player .iframe-player {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    background: #000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    border: none !important;
+    z-index: 9999 !important;
+}
+
+/* Mobil ve Android uygulama içinde iframe fullscreen */
+@media (max-width: 900px) {
+    :fullscreen .video-container-player .iframe-player,
+    :-webkit-full-screen .video-container-player .iframe-player,
+    :-moz-full-screen .video-container-player .iframe-player,
+    :-ms-fullscreen .video-container-player .iframe-player {
+        width: 100vw !important;
+        height: 100vh !important;
+    }
+}
+
+/* Android uygulama içinde iframe fullscreen - tam ekranı doldur */
+html[data-in-app="true"] :fullscreen .video-container-player .iframe-player,
+html[data-in-app="true"] :-webkit-full-screen .video-container-player .iframe-player,
+body[data-in-app="true"] :fullscreen .video-container-player .iframe-player,
+body[data-in-app="true"] :-webkit-full-screen .video-container-player .iframe-player {
+    position: fixed !important;
+    object-fit: cover !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    border: none !important;
+    z-index: 9999 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+/* Fullscreen modunda diğer elementleri gizle */
+:fullscreen .player-sidebar,
+:fullscreen .player-categories-section,
+:fullscreen .player-controls-bar,
+:fullscreen .search-header,
+:-webkit-full-screen .player-sidebar,
+:-webkit-full-screen .player-categories-section,
+:-webkit-full-screen .player-controls-bar,
+:-webkit-full-screen .search-header,
+:-moz-full-screen .player-sidebar,
+:-moz-full-screen .player-categories-section,
+:-moz-full-screen .player-controls-bar,
+:-moz-full-screen .search-header,
+:-ms-fullscreen .player-sidebar,
+:-ms-fullscreen .player-categories-section,
+:-ms-fullscreen .player-controls-bar,
+:-ms-fullscreen .search-header {
+    display: none !important;
+}
+
+/* Fullscreen modunda video container'a tıklama desteği */
+:fullscreen .video-container-player,
+:-webkit-full-screen .video-container-player,
+:-moz-full-screen .video-container-player,
+:-ms-fullscreen .video-container-player {
+    cursor: pointer;
+}
+
+/* Küçük ekranlarda video player responsive */
+@media (max-width: 900px) {
+    .video-container-player {
+        min-height: 250px;
+        max-height: 70vh;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+        position: relative;
+    }
+    
+    .video-container-player .video-player,
+    .video-container-player .iframe-player {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-container-player {
+        min-height: 200px;
+        max-height: 60vh;
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+    
+    .video-container-player .video-player,
+    .video-container-player .iframe-player {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 360px) {
+    .video-container-player {
+        min-height: 180px;
+        max-height: 50vh;
+        width: 100%;
+        max-width: 100vw;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+    
+    .video-container-player .video-player,
+    .video-container-player .iframe-player {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    
+    /* Portrait (dikey) modda */
+    @media (orientation: portrait) {
+        .video-container-player {
+            max-height: 40vh;
+        }
+    }
+    
+    /* Landscape (yatay) modda */
+    @media (orientation: landscape) {
+        .video-container-player {
+            max-height: 60vh;
+        }
+    }
+}
+
+/* Mobil ve Android için genel responsive kurallar */
+@media (max-width: 900px) {
+    /* Portrait-mode aktif değilse normal kurallar */
+    .player-content-wrapper:not(.portrait-mode) .player-main {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+    
+    /* Portrait-mode aktifse ve player-view-mode yoksa gizle */
+    .player-content-wrapper.portrait-mode:not(.player-view-mode) .player-main {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        max-width: 100vw;
+    }
+    
+    /* Portrait-mode ve player-view-mode aktifse görünür */
+    .player-content-wrapper.portrait-mode.player-view-mode .player-main {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+    
+    .video-container-player {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+}
+
+/* Android WebView ve uygulama içi için ekstra güvenlik */
+html[data-in-app="true"] .video-container-player,
+body[data-in-app="true"] .video-container-player {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    min-height: 100% !important;
+    position: relative !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+}
+
+html[data-in-app="true"] .video-container-player .video-player,
+html[data-in-app="true"] .video-container-player .iframe-player,
+body[data-in-app="true"] .video-container-player .video-player,
+body[data-in-app="true"] .video-container-player .iframe-player {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    object-fit: contain !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* Dikey ekranlarda (portrait) kategori tıklandığında kanalları sağa taşı */
+/* Height > width kontrolü ile dikey ekranları tespit et */
+/* İlk sayfada video player gizli, sadece kategori ve kanallar görünür */
+@media (max-width: 900px) {
+    .player-content-wrapper {
+        display: grid !important;
+        grid-template-columns: 40% 60% !important;
+        grid-template-rows: 100vh !important;
+        grid-template-areas: 
+            "categories channels" !important;
+        height: calc(100vh - 62px) !important;
+        overflow: hidden !important;
+        flex-direction: unset !important;
+    }
+    
+    #categoriesSidebar {
+        grid-area: categories !important;
+        width: 100% !important;
+        height: 100% !important;
+        min-width: auto !important;
+        max-width: none !important;
+        border-right: 1px solid var(--border);
+        border-top: 1px solid var(--border);
+    }
+    
+    #channelsSidebar {
+        grid-area: channels !important;
+        width: 100% !important;
+        height: 100% !important;
+        min-width: auto !important;
+        max-width: none !important;
+        display: none; /* Başlangıçta gizli */
+        flex-direction: column;
+        border-right: 1px solid var(--border);
+        border-top: 1px solid var(--border);
+    }
+    
+    /* İlk sayfada video player gizli - 900px'e kadar tüm genişliklerde - SADECE portrait-mode aktifse */
+    .player-content-wrapper.portrait-mode:not(.player-view-mode) .player-main {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+    }
+    
+    /* Kanal seçildiğinde video player görünür - portrait-mode ile birlikte */
+    .player-content-wrapper.portrait-mode.player-view-mode {
+        grid-template-columns: 100% !important;
+        grid-template-rows: 50vh 50vh !important;
+        grid-template-areas: 
+            "player"
+            "channels" !important;
+    }
+    
+    /* Portrait-mode ve player-view-mode birlikteyken player-main görünür - 900px'e kadar tüm genişliklerde */
+    .player-content-wrapper.portrait-mode.player-view-mode .player-main {
+        grid-area: player !important;
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        overflow: visible !important;
+    }
+    
+    /* Portrait-mode ve player-view-mode birlikteyken kategoriler gizli */
+    .player-content-wrapper.portrait-mode.player-view-mode #categoriesSidebar {
+        display: none !important;
+    }
+    
+    /* Portrait-mode ve player-view-mode birlikteyken kanallar görünür */
+    .player-content-wrapper.portrait-mode.player-view-mode #channelsSidebar {
+        display: flex !important;
+        grid-area: channels !important;
+    }
+    
+    /* Kanal seçildiğinde video player görünür - portrait-mode olmadan */
+    .player-content-wrapper.player-view-mode:not(.portrait-mode) {
+        grid-template-rows: 50vh 50vh !important;
+        grid-template-areas: 
+            "player player"
+            "channels channels" !important;
+    }
+    
+    /* Player-view-mode aktifken player-main görünür ve grid'de yer alır */
+    .player-content-wrapper.player-view-mode .player-main {
+        grid-area: player !important;
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    /* Player-view-mode aktifken kategoriler gizli */
+    .player-content-wrapper.player-view-mode #categoriesSidebar {
+        display: none !important;
+    }
+    
+    /* Player-view-mode aktifken kanallar görünür */
+    .player-content-wrapper.player-view-mode #channelsSidebar {
+        display: flex !important;
+        grid-area: channels !important;
+    }
+    
+    /* Kanallar gizliyse - kategoriler tam genişlikte */
+    .player-content-wrapper.channels-hidden {
+        grid-template-columns: 100% !important;
+        grid-template-areas: 
+            "categories" !important;
+    }
+    
+    .player-content-wrapper.channels-hidden.player-view-mode {
+        grid-template-rows: 50vh 50vh !important;
+        grid-template-areas: 
+            "player"
+            "categories" !important;
+    }
+    
+    /* Kategori tıklandığında kanalları göster */
+    .player-content-wrapper:not(.channels-hidden) #channelsSidebar {
+        display: flex !important;
+    }
+    
+    /* Kanallar gizliyse */
+    .player-content-wrapper.channels-hidden #channelsSidebar {
+        display: none !important;
+    }
+    
+    
+    /* Sidebar listeleri tam yükseklikte */
+    .categories-sidebar-list,
+    .channels-sidebar-list {
+        height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Video container tam yükseklikte */
+    .video-container-player {
+        height: 100%;
+        min-height: 100%;
+        max-height: 100%;
+        flex: 1;
+    }
+    
+    /* Diğer media query'lerin override etmesini engelle */
+    .player-sidebar {
+        width: auto !important;
+        min-width: auto !important;
+        max-width: none !important;
+        max-height: none !important;
+        border-bottom: none !important;
+    }
+}
+
+/* JavaScript ile kontrol edilen dikey ekran modu - tüm ölçeklerde çalışır */
+/* Player görünmediğinde/altta kaydığında dikey modu uygula */
+/* İlk sayfada video player gizli, sadece kategori ve kanallar görünür */
+.player-content-wrapper.portrait-mode {
+    display: grid !important;
+    grid-template-columns: 40% 60% !important;
+    grid-template-rows: 100vh !important;
+    grid-template-areas: 
+        "categories channels" !important;
+    height: calc(100vh - 62px) !important;
+    overflow: hidden !important;
+    flex-direction: unset !important;
+}
+
+.player-content-wrapper.portrait-mode #categoriesSidebar {
+    grid-area: categories !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: auto !important;
+    max-width: none !important;
+    border-right: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+}
+
+.player-content-wrapper.portrait-mode #channelsSidebar {
+    grid-area: channels !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: auto !important;
+    max-width: none !important;
+    display: none;
+    flex-direction: column;
+    border-right: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+}
+
+/* İlk sayfada video player gizli - 900px'e kadar tüm genişliklerde */
+.player-content-wrapper.portrait-mode:not(.player-view-mode) .player-main {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Kanal seçildiğinde video player görünür - 900px'e kadar tüm genişliklerde */
+.player-content-wrapper.portrait-mode.player-view-mode .player-main {
+    grid-area: player !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: auto !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+}
+
+.player-content-wrapper.portrait-mode.channels-hidden {
+    grid-template-columns: 100% !important;
+    grid-template-areas: 
+        "categories" !important;
+}
+
+.player-content-wrapper.portrait-mode.channels-hidden.player-view-mode {
+    grid-template-rows: 50vh 50vh !important;
+    grid-template-areas: 
+        "player"
+        "categories" !important;
+}
+
+.player-content-wrapper.portrait-mode:not(.channels-hidden) #channelsSidebar {
+    display: flex !important;
+}
+
+.player-content-wrapper.portrait-mode.channels-hidden #channelsSidebar {
+    display: none !important;
+}
+
+.player-content-wrapper.portrait-mode .player-sidebar {
+    width: auto !important;
+    min-width: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    border-bottom: none !important;
+    height: auto !important;
+}
+
+/* Player View Mode - Dikey modda kanal tıklandığında (kategoriler gizli, sadece player ve kanallar) */
+.player-content-wrapper.portrait-mode.player-view-mode {
+    grid-template-columns: 100% !important;
+    grid-template-rows: 50vh 50vh !important;
+    grid-template-areas: 
+        "player"
+        "channels" !important;
+}
+
+.player-content-wrapper.portrait-mode.player-view-mode #categoriesSidebar {
+    display: none !important;
+}
+
+.player-content-wrapper.portrait-mode.player-view-mode #channelsSidebar {
+    display: flex !important;
+    grid-area: channels !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Geri Dönüş Butonu */
+.back-to-main-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back-to-main-btn:hover {
+    background: rgba(0, 0, 0, 0.85);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateX(-2px);
+}
+
+.back-to-main-btn:active {
+    transform: translateX(0);
+}
+
+.player-content-wrapper.portrait-mode.player-view-mode .back-to-main-btn {
+    display: flex !important;
+}
+
+.player-content-wrapper.portrait-mode:not(.player-view-mode) .back-to-main-btn {
+    display: none !important;
+}
+
+/* Player Page Responsive */
+@media (max-width: 1024px) {
+    .player-sidebar {
+        width: 220px;
+        min-width: 220px;
+        max-width: 220px;
+    }
+
+    .player-categories-container {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .player-categories-section {
+        padding: 0.625rem 0.75rem 0.5rem 0.75rem;
+    }
+    
+    .search-header {
+        padding: 0.35rem 0.6rem;
+        min-height: 44px;
+        max-height: 44px;
+    }
+    
+    .category-sidebar-item,
+    .channel-sidebar-item {
+        padding: 0.45rem;
+        gap: 0.45rem;
+    }
+    
+    .category-sidebar-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 1.1rem;
+    }
+    
+    .channel-sidebar-logo,
+    .channel-sidebar-logo-placeholder {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+@media (max-width: 900px) {
+    /* Portrait-mode class'ı olmadan player-main'i gizle (900px'e kadar tüm genişliklerde) */
+    .player-content-wrapper.portrait-mode:not(.player-view-mode) .player-main {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+    }
+    
+    /* Portrait-mode ve player-view-mode birlikteyken player-main görünür (900px'e kadar tüm genişliklerde) */
+    .player-content-wrapper.portrait-mode.player-view-mode .player-main {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        grid-area: player !important;
+        height: 100% !important;
+        min-height: auto !important;
+        overflow: visible !important;
+    }
+    
+    /* Dikey ekranlarda (portrait) grid layout kullan, yatay ekranlarda column */
+    @media (orientation: portrait) {
+        /* Dikey ekran layout'u yukarıdaki media query'de tanımlı, burada override etme */
+        /* Player-view-mode aktifken grid layout'u koru */
+        .player-content-wrapper.player-view-mode {
+            display: grid !important;
+            grid-template-columns: 100% !important;
+            grid-template-rows: 50vh 50vh !important;
+            grid-template-areas: 
+                "player"
+                "channels" !important;
+        }
+        
+        .player-content-wrapper.player-view-mode .player-main {
+            display: flex !important;
+            grid-area: player !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .player-content-wrapper.player-view-mode #categoriesSidebar {
+            display: none !important;
+        }
+        
+        .player-content-wrapper.player-view-mode #channelsSidebar {
+            display: flex !important;
+            grid-area: channels !important;
+        }
+    }
+    
+    /* Yatay ekranlarda (landscape) eski layout */
+    @media (orientation: landscape) {
+        .player-content-wrapper:not(.player-view-mode) {
+            flex-direction: column;
+        }
+        
+        .player-sidebar {
+            width: 100%;
+            min-width: 100%;
+            max-width: 100%;
+            max-height: 40vh;
+            border-right: none;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        /* Portrait-mode aktif değilse player-main görünür */
+        .player-content-wrapper:not(.portrait-mode) .player-main {
+            min-height: 60vh;
+            width: 100%;
+            display: flex !important;
+        }
+        
+        /* Portrait-mode aktifse player-main gizli (ilk sayfada) */
+        .player-content-wrapper.portrait-mode:not(.player-view-mode) .player-main {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            min-height: 0 !important;
+            max-height: 0 !important;
+            overflow: hidden !important;
+        }
+    }
+    
+    .video-container-player {
+        flex: 1;
+        min-height: 300px;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+    
+    .video-container-player .video-player,
+    .video-container-player .iframe-player {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    
+    /* Portrait (dikey) modda */
+    @media (orientation: portrait) {
+        .video-container-player {
+            max-height: 50vh;
+        }
+    }
+    
+    /* Landscape (yatay) modda */
+    @media (orientation: landscape) {
+        .video-container-player {
+            max-height: 70vh;
+        }
+    }
+    
+    .player-categories-section {
+        padding: 0.5rem 0.6rem 0.4rem 0.6rem;
+    }
+
+    .player-categories-container {
+        gap: 0.3rem;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+    }
+    
+    .search-header {
+        padding: 0.65rem 0.85rem;
+        min-height: 56px;
+        max-height: 56px;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+    
+    .player-content-wrapper {
+        margin-top: 56px; /* Header yüksekliği için */
+    }
+    
+    .player-sidebar {
+        height: calc(100vh - 56px); /* Header yüksekliği çıkar */
+    }
+    
+    .search-container {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        min-height: 44px;
+    }
+
+    .header-left-group {
+        gap: 0.5rem;
+        max-width: calc(100% - 200px);
+        flex-shrink: 1;
+        min-width: 0;
+    }
+
+    .logo-container {
+        height: 24px;
+        padding: 0.1rem 0.25rem;
+    }
+
+    .header-logo {
+        height: 20px;
+        max-width: 80px;
+    }
+    
+    .header-right-buttons {
+        gap: 0.5rem;
+        flex-shrink: 0;
+    }
+    
+    .color-picker-container {
+        gap: 0.25rem;
+        flex-shrink: 1;
+        min-width: 0;
+        overflow: visible;
+        padding: 2px 0; /* Active state için alan bırak */
+    }
+    
+    .channel-source-switch {
+        gap: 0.4rem;
+        margin: 0 0.3rem;
+        flex-shrink: 1;
+        min-width: 0;
+        max-width: 150px; /* Maksimum genişlik sınırı */
+    }
+    
+    .category-sidebar-item,
+    .channel-sidebar-item {
+        padding: 0.4rem;
+        gap: 0.4rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .category-sidebar-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+    
+    .channel-sidebar-logo,
+    .channel-sidebar-logo-placeholder {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .category-sidebar-name,
+    .channel-sidebar-name {
+        font-size: 0.8125rem;
+    }
+    
+    .header-right-buttons {
+        gap: 0.5rem;
+    }
+    
+    .zoom-toggle-btn,
+    .refresh-icon-btn,
+    .search-icon-btn,
+    .sort-icon-btn,
+    .users-switch-btn,
+    .user-icon-btn {
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+        min-height: 28px;
+    }
+    
+    .color-picker-btn {
+        width: 25px;
+        height: 25px;
+        min-width: 25px;
+        min-height: 25px;
+    }
+    
+    .search-header {
+        padding: 0.375rem 0.75rem;
+        min-height: 56px;
+        max-height: 56px;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+    
+    .player-content-wrapper {
+        margin-top: 56px; /* Header yüksekliği için */
+    }
+    
+    .player-sidebar {
+        height: calc(100vh - 56px); /* Header yüksekliği çıkar */
+    }
+    
+    .search-container {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        flex-wrap: nowrap;
+        gap: 0.4rem;
+        min-height: 40px;
+    }
+
+    .header-left-group {
+        gap: 0.4rem;
+        max-width: calc(100% - 180px);
+        flex-shrink: 1;
+        min-width: 0;
+    }
+
+    .logo-container {
+        height: 22px;
+        padding: 0.1rem 0.2rem;
+    }
+
+    .header-logo {
+        height: 18px;
+        max-width: 60px;
+    }
+    
+    .header-right-buttons {
+        gap: 0.4rem;
+        flex-shrink: 0;
+    }
+    
+    .color-picker-container {
+        gap: 0.2rem;
+        flex-shrink: 1;
+        min-width: 0;
+        overflow: visible;
+        padding: 2px 0; /* Active state için alan bırak */
+    }
+    
+    .channel-source-switch {
+        gap: 0.3rem;
+        margin: 0 0.25rem;
+        flex-shrink: 1;
+        min-width: 0;
+        max-width: 120px; /* Maksimum genişlik sınırı */
+    }
+    
+    .channel-source-select {
+        min-width: 120px;
+        font-size: 0.8125rem;
+        padding: 0.5rem 0.85rem;
+        padding-right: 2.5rem;
+        border-radius: 10px;
+        background-size: 12px;
+        background-position: right 0.7rem center;
+    }
+    
+    .users-list-container {
+        min-width: 240px;
+        border-radius: 14px;
+        max-height: 280px;
+    }
+    
+    .user-list-item {
+        padding: 0.75rem 1rem;
+        margin: 0.15rem 0.3rem;
+        border-radius: 8px;
+    }
+}
+
+/* Very small screens - Player Page */
+@media (max-width: 360px) {
+    .player-sidebar {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        max-height: 30vh;
+    }
+    
+    .player-main {
+        min-height: 50vh;
+        max-width: 100%;
+        overflow: hidden;
+    }
+    
+    .video-container-player {
+        min-height: 200px;
+        max-width: 100%;
+        max-height: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+    
+    .video-container-player .video-player,
+    .video-container-player .iframe-player {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        box-sizing: border-box;
+    }
+    
+    .search-header {
+        padding: 0.55rem 0.65rem;
+        min-height: 48px;
+        max-height: 48px;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+    
+    .player-content-wrapper {
+        margin-top: 48px; /* Header yüksekliği için */
+    }
+    
+    .player-sidebar {
+        height: calc(100vh - 48px); /* Header yüksekliği çıkar */
+    }
+    
+    .search-container {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        flex-wrap: nowrap;
+        gap: 0.3rem;
+        min-height: 36px;
+    }
+
+    .header-left-group {
+        gap: 0.3rem;
+        max-width: calc(100% - 160px);
+        flex-shrink: 1;
+        min-width: 0;
+    }
+
+    .logo-container {
+        height: 20px;
+        padding: 0.08rem 0.15rem;
+    }
+
+    .header-logo {
+        height: 16px;
+        max-width: 50px;
+    }
+    
+    .header-right-buttons {
+        gap: 0.3rem;
+        flex-shrink: 0;
+    }
+    
+    .color-picker-container {
+        gap: 0.15rem;
+        flex-shrink: 1;
+        min-width: 0;
+        overflow: visible;
+        padding: 2px 0; /* Active state için alan bırak */
+    }
+    
+    .channel-source-switch {
+        gap: 0.25rem;
+        margin: 0 0.2rem;
+        flex-shrink: 1;
+        min-width: 0;
+        max-width: 100px; /* Maksimum genişlik sınırı */
+    }
+    
+    .channel-source-select {
+        min-width: 100px;
+        font-size: 0.75rem;
+        padding: 0.35rem 0.6rem;
+    }
+    
+    .category-sidebar-item,
+    .channel-sidebar-item {
+        padding: 0.3rem;
+        gap: 0.3rem;
+        margin-bottom: 0.2rem;
+    }
+    
+    .category-sidebar-icon {
+        width: 26px;
+        height: 26px;
+        font-size: 0.85rem;
+    }
+    
+    .channel-sidebar-logo,
+    .channel-sidebar-logo-placeholder {
+        width: 26px;
+        height: 26px;
+    }
+    
+    .category-sidebar-name,
+    .channel-sidebar-name {
+        font-size: 0.7rem;
+    }
+    
+    .zoom-toggle-btn,
+    .refresh-icon-btn,
+    .search-icon-btn,
+    .sort-icon-btn,
+    .users-switch-btn,
+    .user-icon-btn {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        min-height: 24px;
+    }
+    
+    .color-picker-btn {
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        min-height: 20px;
+    }
+    
+    .channel-source-select {
+        min-width: 100px;
+        font-size: 0.75rem;
+        padding: 0.35rem 0.6rem;
+    }
+    
+    .logo-container {
+        height: 26px;
+        padding: 0.1rem 0.25rem;
+    }
+    
+    .header-logo {
+        height: 22px;
+    }
+}

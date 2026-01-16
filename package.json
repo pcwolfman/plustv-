@@ -1,0 +1,40 @@
+{
+  "name": "plustiptv",
+  "version": "1.0.0",
+  "description": "IPTV Player with Xtream Codes and M3U support",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8080 -c-1",
+    "dev": "npx http-server -p 8080 -c-1 -o"
+  },
+  "keywords": [
+    "iptv",
+    "xtream-codes",
+    "m3u",
+    "streaming"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "m3u-parser": "^0.0.3",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
