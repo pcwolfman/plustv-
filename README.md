@@ -58,6 +58,7 @@ The project already includes CDN links for required libraries:
 - Xtream Codes requires valid server credentials
 - All data is stored in browser localStorage
 
+☕ If you find this project helpful, consider [buying me a coffee](https://buymeacoffee.com/pcwolfman).
 
 
 
