@@ -243,6 +243,10 @@ http://188.245.211.255:1935/canlitv/topraktv.stream/playlist.m3u8?hash=5ec325598
 #EXTINF:-1 group-title="Belgesel" tvg-logo="https://files.manuscdn.com/user_upload_by_module/session_file/310519663101870451/ShvSFDVejKiRarvS.png" tvg-url="",NatureTime Türkçe
 #EXTINF:-1 group-title="Çocuk" tvg-logo="https://files.manuscdn.com/user_upload_by_module/session_file/310519663101870451/vLKkcIrwmQoyOWLW.png" tvg-url="https://www.trtcocuk.net.tr/",TRT Çocuk
 https://tv-trtcocuk.medya.trt.com.tr/master.m3u8
+#EXTINF:-1 tvg-id="DisneyJR." tvg-logo="https://www.dsmart.com.tr/api/v1/public/images/kanallar/disneyjr.png" group-title="ÇOCUK",Disney Junior
+https://saran-live.ercdn.net/disneyjunior/index.m3u8
+#EXTINF:-1 tvg-id="Babytv.tr" tvg-logo="https://upload.wikimedia.org/wikipedia/en/b/bc/BabyTV_logo.png" group-title="ÇOCUK",Baby TV
+https://saran-live.ercdn.net/babytv/index.m3u8
 #EXTINF:-1 group-title="Çocuk" tvg-logo="https://files.manuscdn.com/user_upload_by_module/session_file/310519663101870451/nwiHMxgGDYUzfREp.png" tvg-url="https://www.trtdiyanetcocuk.net.tr/",TRT Diyanet Çocuk
 https://tv-trtdiyanetcocuk.medya.trt.com.tr/master.m3u8
 #EXTINF:-1 group-title="Çocuk" tvg-logo="https://files.manuscdn.com/user_upload_by_module/session_file/310519663101870451/aCGJZiBkJclUfXrd.png" tvg-url="https://eba.gov.tr/",TRT EBA
