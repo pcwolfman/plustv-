@@ -1,4 +1,4 @@
-# PlusIPTV
+# PlusTV
 
 IPTV Player with Xtream Codes API and M3U support.
 
@@ -61,6 +61,7 @@ The project already includes CDN links for required libraries:
 ☕ If you find this project helpful, consider [buying me a coffee](https://buymeacoffee.com/pcwolfman).
 
 [![Buy Me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/pcwolfman)
+
 
 
 
