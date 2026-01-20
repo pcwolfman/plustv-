@@ -58,6 +58,8 @@ The project already includes CDN links for required libraries:
 - Xtream Codes requires valid server credentials
 - All data is stored in browser localStorage
 
+<a href="https://www.buymeacoffee.com/pcwolfman" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 
 
 
