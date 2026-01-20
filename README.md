@@ -1,4 +1,4 @@
-# PlusTV
+# PlusIPTV
 
 IPTV Player with Xtream Codes API and M3U support.
 
@@ -57,14 +57,6 @@ The project already includes CDN links for required libraries:
 - For M3U URLs with CORS issues, use the file upload option
 - Xtream Codes requires valid server credentials
 - All data is stored in browser localStorage
-
-☕ If you find this project helpful, consider [buying me a coffee](https://buymeacoffee.com/pcwolfman).
-
-[![Buy Me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/pcwolfman)
-
-
-
-
 
 
 
