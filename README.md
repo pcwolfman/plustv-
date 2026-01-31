@@ -60,7 +60,8 @@ The project already includes CDN links for required libraries:
 
 
 
-<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="pcwolfman" data-color="#5F7FFF" data-emoji="🍕" data-font="Bree" data-text="Buy me a pizza" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
+
+
 
 
 
