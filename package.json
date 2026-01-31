@@ -4,8 +4,10 @@
   "description": "IPTV Player with Xtream Codes and M3U support",
   "main": "index.html",
   "scripts": {
-    "start": "npx http-server -p 8080 -c-1",
-    "dev": "npx http-server -p 8080 -c-1 -o"
+    "start": "node static-server.js",
+    "dev": "node static-server.js",
+    "start:all": "powershell -ExecutionPolicy Bypass -File start-all.ps1",
+    "start:api": "cd ../tvglobal && node server.js"
   },
   "keywords": [
     "iptv",
